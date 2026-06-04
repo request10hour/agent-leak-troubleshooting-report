@@ -29,8 +29,21 @@
 - `secret.key` 파일을 만들고 `agent_api_key_test`를 쓴다.
 - `AGENT_PORT`, `AGENT_UPLOAD_DIR`, `AGENT_KEY_PATH`, `AGENT_LOG_DIR`을 export한다.
 
+과제 문서에서는 실행 대상을 `agent-leak-app`이라고 부르지만, 실제 압축 해제 후 확인된 실행 파일명은 `agent-app-leak`였다. 리포트에서는 실제 관측된 파일명을 우선 사용했다.
+
 ## 4. 발표 때 설명할 핵심 문장
 
 - “이 단계는 장애를 고치는 단계가 아니라, 앱이 실행될 수 있는 기본 조건을 맞추는 단계입니다.”
 - “환경변수는 프로그램 밖에서 동작 조건을 바꾸는 설정값입니다.”
 - “`MEMORY_LIMIT`, `CPU_MAX_OCCUPY`, `MULTI_THREAD_ENABLE`은 이번 과제에서 Before & After 비교에 사용한 핵심 조절값입니다.”
+
+## 5. 준비 상태 확인에 사용한 명령어
+
+| 확인 대상 | 사용 명령어 | 확인 의미 |
+| --- | --- | --- |
+| 현재 사용자 | `whoami`, `id` | root가 아닌 일반 사용자로 실행 중인지 확인한다. |
+| 작업 디렉터리 | `pwd` | repo와 `AGENT_HOME` 기준 경로를 확인한다. |
+| 필수 폴더 | `test -d "$AGENT_UPLOAD_DIR"` 등 | 앱이 요구하는 업로드/키/로그 디렉터리가 있는지 확인한다. |
+| `secret.key` | `cat "$AGENT_KEY_PATH/secret.key"` | 인증 키 내용이 `agent_api_key_test`인지 확인한다. |
+| 포트 15034 | <code>ss -ltnp &#124; grep ':15034'</code> | 같은 포트를 이미 쓰는 프로세스가 있는지 확인한다. |
+| 메모리/디스크 | `free -h`, `df -h` | 실험을 수행할 여유 자원이 있는지 확인한다. |

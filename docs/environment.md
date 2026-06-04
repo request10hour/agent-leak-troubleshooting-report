@@ -191,5 +191,12 @@ $ which unzip curl wget timeout ps top kill grep awk sed tee date
 ```
 
 ```text
+$ which ss
+/usr/bin/ss
+```
+
+```text
 $ ss -ltnp 2>/dev/null | grep ':15034' || true
 ```
+
+출력이 없다는 것은 수집 시점에 TCP 15034 포트를 점유한 listening 프로세스가 없었다는 뜻이다.

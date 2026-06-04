@@ -218,9 +218,9 @@ def svg_oom_graph(before: OomSeries, after: OomSeries, out_path: Path) -> None:
 
     lines.extend(
         [
-            f'<text x="{legend_x}" y="{legend_y + 76}" font-family="monospace" font-size="13">Before: 19s survival</text>',
-            f'<text x="{legend_x}" y="{legend_y + 98}" font-family="monospace" font-size="13">After: 42s survival</text>',
-            f'<text x="{legend_x}" y="{legend_y + 120}" font-family="monospace" font-size="13">MemoryGuard terminated</text>',
+            f'<text x="{legend_x}" y="{legend_y + 76}" font-family="monospace" font-size="13">Before: run metadata survival 19s</text>',
+            f'<text x="{legend_x}" y="{legend_y + 98}" font-family="monospace" font-size="13">After: run metadata survival 42s</text>',
+            f'<text x="{legend_x}" y="{legend_y + 120}" font-family="monospace" font-size="13">process_missing marks monitor end</text>',
             f'<text x="{left}" y="{height - 42}" font-family="monospace" font-size="12">RSS values are sampled from monitor.sh. Repeated identical RSS samples were collapsed for readability.</text>',
             f'<text x="{left}" y="{height - 22}" font-family="monospace" font-size="12">Raw logs remain unchanged in evidence/oom/.</text>',
             "</svg>",

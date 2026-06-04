@@ -66,9 +66,9 @@
 <text x="822" y="143" font-family="monospace" font-size="13">Before MEMORY_LIMIT=128</text>
 <rect x="798" y="162" width="16" height="4" fill="#1864ab"/>
 <text x="822" y="169" font-family="monospace" font-size="13">After MEMORY_LIMIT=256</text>
-<text x="798" y="224" font-family="monospace" font-size="13">Before: 19s survival</text>
-<text x="798" y="246" font-family="monospace" font-size="13">After: 42s survival</text>
-<text x="798" y="268" font-family="monospace" font-size="13">MemoryGuard terminated</text>
+<text x="798" y="224" font-family="monospace" font-size="13">Before: run metadata survival 19s</text>
+<text x="798" y="246" font-family="monospace" font-size="13">After: run metadata survival 42s</text>
+<text x="798" y="268" font-family="monospace" font-size="13">process_missing marks monitor end</text>
 <text x="80" y="548" font-family="monospace" font-size="12">RSS values are sampled from monitor.sh. Repeated identical RSS samples were collapsed for readability.</text>
 <text x="80" y="568" font-family="monospace" font-size="12">Raw logs remain unchanged in evidence/oom/.</text>
 </svg>

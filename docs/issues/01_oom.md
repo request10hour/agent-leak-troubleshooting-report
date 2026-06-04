@@ -14,7 +14,7 @@ Graph:
 
 ![OOM RSS growth](../../evidence/graphs/01_oom_rss_growth.svg)
 
-그래프는 `monitor.sh`의 RSS 샘플을 사용했다. 보기 쉽게 같은 RSS가 반복되는 구간은 줄였지만, 원본 로그는 `evidence/oom/`에 그대로 보존했다.
+그래프는 `monitor.sh`의 RSS 샘플을 사용했다. 같은 RSS가 반복되는 구간은 보기 쉽게 줄였고, `process_missing`은 monitor 관점에서 worker PID가 사라진 시점을 의미한다. 생존 시간 `19s -> 42s`는 실행 metadata 기준 Before & After 비교값이다.
 
 - 파일:
   - `evidence/oom/before_app.log`

@@ -14,7 +14,7 @@ Graph:
 
 ![CPU load growth](../../evidence/graphs/02_cpu_load_growth.svg)
 
-CPU 그래프는 앱 로그의 `CpuWorker` load 값만 사용했다. `57.45%` threshold 초과와 `10.00%` cooldown 반복을 원본 값 그대로 표시한다.
+CPU 그래프는 앱 로그의 `CpuWorker` load 값만 사용했다. `57.45%` threshold 초과와 `10.00%` cooldown 반복을 원본 값 그대로 표시한다. 따라서 CPU 케이스는 앱 내부 `CpuWorker` load, 고빈도 `top` 샘플, 직후 PID 소멸을 함께 근거로 판단했다.
 
 - 파일:
   - `evidence/cpu/before_app.log`
@@ -93,8 +93,7 @@ Before & After:
 - `CPU_MAX_OCCUPY=100`은 앱 로그에서 `Recommend Under 50%` 경고가 표시되는 설정이다.
 - `CpuWorker`가 load를 계속 올리다가 내부 보호 기준을 넘었고, 앱은 시스템 응답성 저하를 막기 위해 프로세스를 종료했다.
 - `top` 고빈도 샘플에서는 OS 관점 `%CPU`가 최대 25.0%로 잡혔다. 앱 내부 load 57.45%와 OS 샘플 값이 완전히 같지는 않지만, 짧은 burst 또는 앱 내부 계산 기준 차이로 볼 수 있다.
-- 리터럴 `WATCHDOG` 또는 `SIGTERM` 문자열은 이번 로그에서 관측되지 않았다. 대신 보호 종료 근거는 `[CRITICAL] [CpuWorker] CPU Threshold Violated!` 메시지와 직후 PID 소멸이다.
-- No literal WATCHDOG/SIGTERM strings were observed in the actual logs. The observed protection message was `CPU Threshold Violated!`.
+- 실제 실행 로그에서는 리터럴 `WATCHDOG` 또는 `SIGTERM` 문자열이 관측되지 않았다. 이번 실행에서 확인한 보호 종료 근거는 `[CRITICAL] [CpuWorker] CPU Threshold Violated!` 메시지와 직후 PID 소멸이다.
 
 ## 4. Workaround & Verification (조치 및 검증)
 - 임시 조치: `CPU_MAX_OCCUPY=100`에서 `CPU_MAX_OCCUPY=10`으로 낮췄다.

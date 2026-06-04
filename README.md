@@ -11,6 +11,7 @@ agent-leak-troubleshooting/
 ├── README.md
 ├── docs/
 │   ├── environment.md
+│   ├── prerequisites.md
 │   ├── final_report.md
 │   ├── evaluation_answers.md
 │   ├── evaluation_checklist.md

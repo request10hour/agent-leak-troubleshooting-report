@@ -170,7 +170,7 @@ capture_cpu() {
   type_command "grep -E \"Current Load: 57.45|CPU Threshold Violated\" evidence/cpu/before_app.log"
   type_command "grep -E \"Peak reached \\(10.00%\\)\" evidence/cpu/after_app.log | head -n 3"
   type_command "grep -E \"10488|process_missing\" evidence/cpu/before_monitor.log | tail -n 5"
-  type_command "grep -n \"No literal WATCHDOG\" docs/issues/02_cpu.md"
+  type_command "grep -E \"WATCHDOG|SIGTERM\" evidence/cpu/*_app.log || true"
   capture_screen "evidence/screenshots/02_cpu_terminal.png"
   close_terminal
 }
