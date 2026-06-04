@@ -10,6 +10,8 @@ scripts/monitor.sh PID evidence/oom/before_monitor.log 1 90
 
 `monitor.sh`는 1초마다 `ps -p PID`를 실행해서 `pcpu`, `pmem`, `rss_kb`, `vsz_kb`, `etime`을 저장했다. OOM에서는 `rss_kb`가 `21620KB -> 149640KB`처럼 증가하는지 확인했다.
 
+여기서 PID는 Linux가 프로세스에 붙이는 번호다. RSS는 실제 메모리에 올라간 크기라서, OOM 설명에서 가장 보기 쉬운 숫자다.
+
 ## 2. CPU 사용률 확인 도구와 옵션
 
 `top -p PID`는 특정 프로세스 하나의 CPU/MEM 변화를 본다.
@@ -19,6 +21,8 @@ scripts/monitor.sh PID evidence/oom/before_monitor.log 1 90
 `ps -p PID -o pid,ppid,stat,pcpu,pmem,etime,cmd`는 프로세스 상태, CPU, 메모리, 실행 시간을 한 줄로 저장한다.
 
 `ps -L -p PID -o pid,tid,stat,pcpu,pmem,etime,comm`는 프로세스의 스레드 목록을 확인한다.
+
+`ps`는 현재 프로세스 상태를 한 번 찍어 보는 명령이고, `top`은 CPU와 메모리 변화를 계속 관찰하는 명령이다. thread는 한 프로세스 안에서 동시에 움직이는 작은 실행 단위라고 보면 된다.
 
 CPU 케이스에서는 추가로 짧은 spike를 잡기 위해 다음 명령을 썼다.
 
@@ -45,6 +49,8 @@ CPU를 한 프로세스가 오래 점유하면 다른 작업의 응답성이 떨
 ## 6. Deadlock 원리
 
 Deadlock은 서로 필요한 자원을 잡고 놓지 않을 때 생긴다. 이번 로그에서는 두 스레드가 각각 하나의 lock을 가진 상태에서 상대방 lock을 기다렸다. 그래서 더 이상 진행되지 않았다.
+
+lock은 여러 작업이 같은 자원을 동시에 건드리지 못하게 잠그는 장치다. 순서를 잘못 잡으면 안전장치가 오히려 서로를 기다리게 만들 수 있다.
 
 ## 7. A to B, B to A 순환 의존 파악
 

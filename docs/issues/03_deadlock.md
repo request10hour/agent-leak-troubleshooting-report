@@ -4,6 +4,7 @@
 - `MULTI_THREAD_ENABLE=true` 조건에서 worker PID `10964`는 살아 있었지만 로그가 `WAITING` / `BLOCKED` 지점에서 멈췄다.
 - 같은 `MEMORY_LIMIT=512`, `CPU_MAX_OCCUPY=10` 조건에서 `MULTI_THREAD_ENABLE=false`로 바꾸면 로그가 계속 갱신되고 순차 작업이 완료되어 데드락이 회피되었다.
 - Deadlock만 분리하기 위해 CPU 보호 종료가 먼저 발생하는 `CPU_MAX_OCCUPY=100` 대신 `10`을 사용했다.
+- Deadlock은 두 작업이 서로 필요한 자원을 잡고 놓지 않아 아무도 앞으로 진행하지 못하는 상태다.
 
 ## 2. Evidence & Logs (증거 자료)
 Screenshot:
@@ -20,6 +21,13 @@ Screenshot:
   - `evidence/deadlock/after_monitor.log`
   - `evidence/deadlock/after_ps.txt`
   - `evidence/deadlock/after_threads.txt`
+
+Configuration:
+
+```text
+Before MULTI_THREAD_ENABLE=true
+After  MULTI_THREAD_ENABLE=false
+```
 
 Before PID:
 
@@ -106,6 +114,7 @@ After app log:
 - 두 스레드가 서로의 자원을 기다리므로 A to B, B to A 형태의 순환 대기가 생겼다.
 - 이 상황은 데드락의 조건 중 상호 배제, 점유 대기, 비선점, 순환 대기가 동시에 만족된 것으로 볼 수 있다.
 - PID는 살아 있지만 CPU/MEM 변화가 거의 없고 로그가 멈췄기 때문에 정상 진행이 아니라 대기 상태로 판단했다.
+- 프로세스가 살아있다는 것은 종료되지 않았다는 뜻일 뿐, 일을 계속하고 있다는 뜻은 아니다. 로그가 멈추고 CPU/MEM 변화가 없으면 살아 있지만 멈춘 상태로 볼 수 있다.
 
 ## 4. Workaround & Verification (조치 및 검증)
 - 임시 조치: `MULTI_THREAD_ENABLE=true`에서 `MULTI_THREAD_ENABLE=false`로 변경했다.

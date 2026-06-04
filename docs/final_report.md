@@ -16,15 +16,19 @@ Created Files:
 - docs/issues/02_cpu.md
 - docs/issues/03_deadlock.md
 - docs/evaluation_answers.md
+- docs/prerequisites.md
 - docs/final_report.md
 - evidence/oom/*
 - evidence/cpu/*
 - evidence/deadlock/*
+- evidence/screenshots/*
+- evidence/graphs/*
 - scripts/env_base.sh
 - scripts/run_agent.sh
 - scripts/monitor.sh
 - scripts/capture_status.sh
 - scripts/make_screenshots.sh
+- scripts/make_graphs.py
 
 Screenshot Evidence:
 - OOM: evidence/screenshots/01_oom_terminal.png
@@ -35,7 +39,12 @@ GUI Capture Method:
 - Direct DISPLAY: not available
 - Xvfb: used
 - Terminal program: xterm
+- Command typing tool: xdotool
 - Screenshot tool: scrot
+
+Graph Evidence:
+- OOM RSS growth: evidence/graphs/01_oom_rss_growth.svg
+- CPU load growth: evidence/graphs/02_cpu_load_growth.svg
 
 OOM Summary:
 - PID: launcher 9049, observed worker 9053

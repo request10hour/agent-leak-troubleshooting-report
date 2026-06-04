@@ -21,7 +21,8 @@ agent-leak-troubleshooting/
 │   ├── oom/
 │   ├── cpu/
 │   ├── deadlock/
-│   └── screenshots/
+│   ├── screenshots/
+│   └── graphs/
 └── scripts/
 ```
 
@@ -33,6 +34,10 @@ agent-leak-troubleshooting/
 
 - [Environment Check](docs/environment.md)
 
+## Prerequisites
+
+- [Prerequisites](docs/prerequisites.md)
+
 ## Reports
 
 - OOM Report: [docs/issues/01_oom.md](docs/issues/01_oom.md)
@@ -40,12 +45,18 @@ agent-leak-troubleshooting/
 - Deadlock Report: [docs/issues/03_deadlock.md](docs/issues/03_deadlock.md)
 - Evaluation Answers: [docs/evaluation_answers.md](docs/evaluation_answers.md)
 
+## Visual Evidence
+
+- Terminal screenshots: `evidence/screenshots/`
+- Graphs: `evidence/graphs/`
+
 ## Evidence
 
 - `evidence/oom/`: `MEMORY_LIMIT` 변경 전후 로그와 monitor 결과
 - `evidence/cpu/`: `CPU_MAX_OCCUPY` 변경 전후 로그와 top/ps 결과
 - `evidence/deadlock/`: `MULTI_THREAD_ENABLE` 변경 전후 PID, thread, top-H 결과
-- `evidence/screenshots/`: 각 장애 케이스의 GUI 터미널 캡처 이미지
+- `evidence/screenshots/`: 실제 터미널 창에서 명령어와 출력이 보이도록 캡처한 이미지
+- `evidence/graphs/`: OOM RSS 증가와 CPU load 변화를 시각화한 그래프
 
 ## Reproduction Summary
 

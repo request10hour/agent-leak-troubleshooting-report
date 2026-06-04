@@ -10,6 +10,10 @@ Screenshot:
 
 ![CPU terminal evidence](../../evidence/screenshots/02_cpu_terminal.png)
 
+Graph:
+
+![CPU load growth](../../evidence/graphs/02_cpu_load_growth.svg)
+
 - 파일:
   - `evidence/cpu/before_app.log`
   - `evidence/cpu/before_monitor.log`
@@ -38,6 +42,8 @@ Before app log:
 2026-06-05 03:46:25,802 [INFO] [CpuWorker] Current Load: 57.45%
 2026-06-05 03:46:25,904 [CRITICAL] [CpuWorker] CPU Threshold Violated! (57.45%).
 ```
+
+CPU를 한 프로세스가 오래 점유하면 같은 서버의 다른 작업이 늦게 처리된다. 그래서 앱은 CPU load가 보호 기준을 넘으면 종료해서 시스템 전체 지연을 막는다.
 
 Before top evidence:
 
@@ -86,6 +92,7 @@ Before & After:
 - `CpuWorker`가 load를 계속 올리다가 내부 보호 기준을 넘었고, 앱은 시스템 응답성 저하를 막기 위해 프로세스를 종료했다.
 - `top` 고빈도 샘플에서는 OS 관점 `%CPU`가 최대 25.0%로 잡혔다. 앱 내부 load 57.45%와 OS 샘플 값이 완전히 같지는 않지만, 짧은 burst 또는 앱 내부 계산 기준 차이로 볼 수 있다.
 - 리터럴 `WATCHDOG` 또는 `SIGTERM` 문자열은 이번 로그에서 관측되지 않았다. 대신 보호 종료 근거는 `[CRITICAL] [CpuWorker] CPU Threshold Violated!` 메시지와 직후 PID 소멸이다.
+- No literal WATCHDOG/SIGTERM strings were observed in the actual logs. The observed protection message was `CPU Threshold Violated!`.
 
 ## 4. Workaround & Verification (조치 및 검증)
 - 임시 조치: `CPU_MAX_OCCUPY=100`에서 `CPU_MAX_OCCUPY=10`으로 낮췄다.

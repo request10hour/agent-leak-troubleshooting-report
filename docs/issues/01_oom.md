@@ -10,6 +10,10 @@ Screenshot:
 
 ![OOM terminal evidence](../../evidence/screenshots/01_oom_terminal.png)
 
+Graph:
+
+![OOM RSS growth](../../evidence/graphs/01_oom_rss_growth.svg)
+
 - 파일:
   - `evidence/oom/before_app.log`
   - `evidence/oom/before_monitor.log`
@@ -35,6 +39,8 @@ Before monitor excerpt:
 2026-06-05T03:38:25+09:00    9053 SN    1.3  0.9 149640 160716      00:15 ./agent-app-leak
 2026-06-05T03:38:28+09:00 process_missing pid=9053
 ```
+
+RSS는 실제 물리 메모리에 올라와 있는 프로세스 메모리 크기다. 이 값이 계속 증가하면 프로그램이 메모리를 반납하지 않고 쌓아두는 상황으로 볼 수 있다.
 
 Before app log:
 
@@ -84,6 +90,7 @@ Before & After:
 - `MemoryWorker`가 주기적으로 heap을 늘리고, 실제 RSS도 함께 증가했다.
 - Linux에서 프로세스 RSS가 계속 증가하면 전체 시스템 메모리를 압박할 수 있다.
 - 이 앱은 OS OOM Killer가 개입하기 전에 자체 `MemoryGuard` 기준으로 메모리 사용량을 검사하고, 제한을 초과하면 자기 자신을 종료한다.
+- `MemoryGuard`는 앱 내부의 안전장치다. 메모리가 계속 커져서 서버 전체가 불안정해지기 전에 자기 자신을 종료한다.
 - `MEMORY_LIMIT`를 올렸을 때 종료 시점이 늦어진 것은 메모리 증가 속도는 비슷하지만 허용 상한이 커졌기 때문이다.
 
 ## 4. Workaround & Verification (조치 및 검증)
