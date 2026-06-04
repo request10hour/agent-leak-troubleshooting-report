@@ -147,6 +147,56 @@ def text(x: float, y: float, value: str, size: int = 13, fill: str = "#212529", 
     )
 
 
+def require_text(path: Path, tokens: list[str]) -> None:
+    """Warn if expected evidence text is not present."""
+    content = path.read_text()
+    missing = [token for token in tokens if token not in content]
+    if missing:
+        print(f"warning: {path} missing {missing}")
+
+
+def rect_node(
+    x: float,
+    y: float,
+    width: float,
+    height: float,
+    title: str,
+    lines_text: list[str],
+    fill: str,
+    stroke: str,
+    radius: int = 10,
+) -> list[str]:
+    """Draw a labeled SVG node."""
+    lines = [
+        f'<rect x="{x}" y="{y}" width="{width}" height="{height}" rx="{radius}" fill="{fill}" stroke="{stroke}" stroke-width="2"/>',
+        text(x + 18, y + 30, title, 15, "#212529", "bold"),
+    ]
+    for index, value in enumerate(lines_text):
+        lines.append(text(x + 18, y + 56 + index * 21, value, 12, "#495057"))
+    return lines
+
+
+def arrow(
+    x1: float,
+    y1: float,
+    x2: float,
+    y2: float,
+    label: str,
+    color: str,
+    dashed: bool = False,
+    label_dx: float = 0,
+    label_dy: float = 0,
+) -> list[str]:
+    """Draw a directed edge with a short label."""
+    dash = ' stroke-dasharray="7 5"' if dashed else ""
+    mid_x = (x1 + x2) / 2 + label_dx
+    mid_y = (y1 + y2) / 2 + label_dy
+    return [
+        f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" stroke="{color}" stroke-width="3"{dash} marker-end="url(#arrowhead)"/>',
+        text(mid_x, mid_y, label, 12, color, "bold"),
+    ]
+
+
 def draw_axes(
     lines: list[str],
     left: float,
@@ -314,6 +364,64 @@ def svg_cpu_graph(before: list[tuple[float, float]], after: list[tuple[float, fl
     out_path.write_text("\n".join(lines) + "\n")
 
 
+def svg_deadlock_diagram(out_path: Path) -> None:
+    """Write a wait-for graph from existing deadlock evidence."""
+    require_text(
+        ROOT / "evidence" / "deadlock" / "before_app.log",
+        ["Worker-Thread-1", "Worker-Thread-2", "Shared_Memory_A", "Socket_Pool_B", "WAITING", "BLOCKED"],
+    )
+    require_text(ROOT / "docs" / "issues" / "03_deadlock.md", ["10964", "2693", "21708KB", "3538", "5662"])
+
+    width, height = 1100, 620
+    lines = [
+        f'<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" viewBox="0 0 {width} {height}">',
+        "<title>Deadlock Wait-For Graph</title>",
+        "<desc>Deadlock evidence includes Worker-Thread-1, Worker-Thread-2, Shared_Memory_A, Socket_Pool_B, WAITING, BLOCKED, PID 10964, log size 2693, RSS 21708KB, and log growth 3538 to 5662.</desc>",
+        '<defs><marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0, 10 3.5, 0 7" fill="context-stroke"/></marker></defs>',
+        '<rect width="100%" height="100%" fill="white"/>',
+        text(60, 42, "Deadlock Wait-For Graph", 24, "#212529", "bold"),
+        text(60, 68, "Circular wait detected: no worker thread can make progress", 14, "#c92a2a", "bold"),
+    ]
+
+    # Node positions are fixed so the circular wait is visible at a glance.
+    shared = (80, 105, 260, 105)
+    thread1 = (740, 105, 280, 120)
+    socket = (740, 335, 260, 105)
+    thread2 = (80, 335, 280, 120)
+
+    lines.extend(rect_node(*shared, "Shared_Memory_A", ["locked resource"], "#e7f5ff", "#1864ab", 18))
+    lines.extend(rect_node(*thread1, "Worker-Thread-1", ["holds: Shared_Memory_A", "waits: Socket_Pool_B"], "#fff5f5", "#c92a2a", 8))
+    lines.extend(rect_node(*socket, "Socket_Pool_B", ["locked resource"], "#e7f5ff", "#1864ab", 18))
+    lines.extend(rect_node(*thread2, "Worker-Thread-2", ["holds: Socket_Pool_B", "waits: Shared_Memory_A"], "#fff5f5", "#c92a2a", 8))
+
+    lines.extend(arrow(340, 157, 740, 157, "held by", "#1864ab", False, -36, -12))
+    lines.extend(arrow(880, 225, 880, 335, "waiting for", "#c92a2a", True, 15, -3))
+    lines.extend(arrow(740, 387, 360, 395, "held by", "#1864ab", False, -30, -14))
+    lines.extend(arrow(220, 335, 220, 210, "waiting for", "#c92a2a", True, 14, 0))
+
+    lines.extend(
+        [
+            '<rect x="407" y="242" width="286" height="88" rx="10" fill="#fff9db" stroke="#f08c00" stroke-width="2"/>',
+            text(432, 274, "Circular wait", 18, "#e67700", "bold"),
+            text(432, 301, "Thread-1 waits for B", 13, "#5f3dc4"),
+            text(432, 322, "Thread-2 waits for A", 13, "#5f3dc4"),
+            '<rect x="60" y="500" width="470" height="92" rx="8" fill="#f8f9fa" stroke="#adb5bd"/>',
+            text(82, 526, "Observed Symptoms", 15, "#212529", "bold"),
+            text(82, 550, "PID 10964 alive | log size 2693 -> 2693 bytes", 12, "#495057"),
+            text(82, 571, "CPU 0.4% -> 0.1% | RSS 21708KB unchanged", 12, "#495057"),
+            text(82, 592, "last logs: WAITING / BLOCKED", 12, "#495057"),
+            '<rect x="570" y="500" width="470" height="92" rx="8" fill="#f8f9fa" stroke="#adb5bd"/>',
+            text(592, 526, "Workaround Verification", 15, "#212529", "bold"),
+            text(592, 550, "MULTI_THREAD_ENABLE=true  -> log stopped", 12, "#495057"),
+            text(592, 571, "MULTI_THREAD_ENABLE=false -> log grew 3538 -> 5662 bytes", 12, "#495057"),
+            text(592, 592, "Thread-A/B/C completed", 12, "#495057"),
+            text(60, 610, "Evidence is based on before_app.log plus ps/top snapshots. Diagram is a visual summary, not a replacement for raw logs.", 11, "#495057"),
+            "</svg>",
+        ]
+    )
+    out_path.write_text("\n".join(lines) + "\n")
+
+
 def main() -> None:
     GRAPH_DIR.mkdir(parents=True, exist_ok=True)
 
@@ -326,6 +434,9 @@ def main() -> None:
     cpu_before = parse_cpu_log(ROOT / "evidence" / "cpu" / "before_app.log")
     cpu_after = parse_cpu_log(ROOT / "evidence" / "cpu" / "after_app.log")
     svg_cpu_graph(cpu_before, cpu_after, GRAPH_DIR / "02_cpu_load_growth.svg")
+
+    # Deadlock graph is a wait-for diagram, not a numeric trend chart.
+    svg_deadlock_diagram(GRAPH_DIR / "03_deadlock_wait_for_graph.svg")
 
     print("Created graphs:")
     for path in sorted(GRAPH_DIR.glob("*.svg")):

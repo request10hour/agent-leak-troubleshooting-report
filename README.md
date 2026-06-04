@@ -52,6 +52,7 @@ agent-leak-troubleshooting/
 
 - Terminal screenshots: `evidence/screenshots/`
 - Graphs: `evidence/graphs/`
+- Deadlock wait-for graph: `evidence/graphs/03_deadlock_wait_for_graph.svg`
 
 ## Evidence
 
@@ -59,7 +60,7 @@ agent-leak-troubleshooting/
 - `evidence/cpu/`: `CPU_MAX_OCCUPY` 변경 전후 로그와 top/ps 결과
 - `evidence/deadlock/`: `MULTI_THREAD_ENABLE` 변경 전후 PID, thread, top-H 결과
 - `evidence/screenshots/`: 실제 터미널 창에서 명령어와 출력이 보이도록 캡처한 이미지
-- `evidence/graphs/`: OOM RSS 증가와 CPU load 변화를 시각화한 그래프
+- `evidence/graphs/`: OOM RSS 증가, CPU load 변화, Deadlock wait-for 관계를 시각화한 자료
 
 ## Reproduction Summary
 

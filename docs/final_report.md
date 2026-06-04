@@ -47,6 +47,7 @@ GUI Capture Method:
 Graph Evidence:
 - OOM RSS growth: evidence/graphs/01_oom_rss_growth.svg
 - CPU load growth: evidence/graphs/02_cpu_load_growth.svg
+- Deadlock wait-for graph: evidence/graphs/03_deadlock_wait_for_graph.svg
 - OOM graph uses two panels for Before/After, collapsed RSS change points, MEMORY_LIMIT lines, and process_missing markers while preserving raw logs.
 - CPU graph uses fixed 0-60% y-axis ticks, 10%/50% reference lines, and a `CPU Threshold Violated! (57.45%)` annotation.
 
@@ -86,6 +87,7 @@ Deadlock Summary:
   - `Worker-Thread-2 WAITING for [Shared_Memory_A]... (Status: BLOCKED)`
   - `Worker-Thread-1 WAITING for [Socket_Pool_B]... (Status: BLOCKED)`
 - After는 로그 크기 3538 bytes -> 5662 bytes로 증가했고 Thread-A/B/C가 순차 완료되었다.
+- Wait-for graph로 Worker-Thread-1/2와 Shared_Memory_A/Socket_Pool_B 사이의 순환 대기를 시각화했다.
 
 Important Explanation Points:
 - 실제 리소스를 쓰는 PID는 런처의 자식 프로세스였다. 그래서 launcher PID와 observed worker PID를 분리해서 기록했다.
