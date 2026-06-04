@@ -6,6 +6,10 @@
 - 실행 조건은 `CPU_MAX_OCCUPY=100`, `MULTI_THREAD_ENABLE=false`, `AGENT_PORT=15034`였다.
 
 ## 2. Evidence & Logs (증거 자료)
+Screenshot:
+
+![OOM terminal evidence](../../evidence/screenshots/01_oom_terminal.png)
+
 - 파일:
   - `evidence/oom/before_app.log`
   - `evidence/oom/before_monitor.log`

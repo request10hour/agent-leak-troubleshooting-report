@@ -6,6 +6,10 @@
 - Deadlock만 분리하기 위해 CPU 보호 종료가 먼저 발생하는 `CPU_MAX_OCCUPY=100` 대신 `10`을 사용했다.
 
 ## 2. Evidence & Logs (증거 자료)
+Screenshot:
+
+![Deadlock terminal evidence](../../evidence/screenshots/03_deadlock_terminal.png)
+
 - 파일:
   - `evidence/deadlock/before_app.log`
   - `evidence/deadlock/before_monitor.log`

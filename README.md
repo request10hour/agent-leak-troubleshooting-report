@@ -20,7 +20,8 @@ agent-leak-troubleshooting/
 ├── evidence/
 │   ├── oom/
 │   ├── cpu/
-│   └── deadlock/
+│   ├── deadlock/
+│   └── screenshots/
 └── scripts/
 ```
 
@@ -44,6 +45,7 @@ agent-leak-troubleshooting/
 - `evidence/oom/`: `MEMORY_LIMIT` 변경 전후 로그와 monitor 결과
 - `evidence/cpu/`: `CPU_MAX_OCCUPY` 변경 전후 로그와 top/ps 결과
 - `evidence/deadlock/`: `MULTI_THREAD_ENABLE` 변경 전후 PID, thread, top-H 결과
+- `evidence/screenshots/`: 각 장애 케이스의 GUI 터미널 캡처 이미지
 
 ## Reproduction Summary
 

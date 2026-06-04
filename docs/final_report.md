@@ -24,6 +24,18 @@ Created Files:
 - scripts/run_agent.sh
 - scripts/monitor.sh
 - scripts/capture_status.sh
+- scripts/make_screenshots.sh
+
+Screenshot Evidence:
+- OOM: evidence/screenshots/01_oom_terminal.png
+- CPU: evidence/screenshots/02_cpu_terminal.png
+- Deadlock: evidence/screenshots/03_deadlock_terminal.png
+
+GUI Capture Method:
+- Direct DISPLAY: not available
+- Xvfb: used
+- Terminal program: xterm
+- Screenshot tool: scrot
 
 OOM Summary:
 - PID: launcher 9049, observed worker 9053

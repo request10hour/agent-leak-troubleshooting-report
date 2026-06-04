@@ -6,6 +6,10 @@
 - 실제 앱 동작은 과제 권장 예시와 달리 `CPU_MAX_OCCUPY`를 높게 둔 경우에 장애가 재현되었다. 따라서 보고서는 실제 관측값을 기준으로 작성했다.
 
 ## 2. Evidence & Logs (증거 자료)
+Screenshot:
+
+![CPU terminal evidence](../../evidence/screenshots/02_cpu_terminal.png)
+
 - 파일:
   - `evidence/cpu/before_app.log`
   - `evidence/cpu/before_monitor.log`
