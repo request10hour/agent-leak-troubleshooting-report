@@ -1,0 +1,9 @@
+label=inspect
+start_iso=2026-06-05T03:37:38+09:00
+app_path=./agent-app-leak
+MEMORY_LIMIT=512
+CPU_MAX_OCCUPY=100
+MULTI_THREAD_ENABLE=false
+AGENT_HOME=/home/c10hour0574/agent-leak-troubleshooting/agent_home
+AGENT_PORT=15034
+pid=8966

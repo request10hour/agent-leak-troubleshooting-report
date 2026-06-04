@@ -1,0 +1,13 @@
+timestamp=2026-06-05T03:49:54+09:00
+$ ps -L -p 11162 -o pid,tid,stat,pcpu,pmem,etime,comm
+    PID     TID STAT %CPU %MEM     ELAPSED COMMAND
+  11162   11162 SNl   0.3  0.7       00:12 agent-app-leak
+  11162   11177 SNl   1.3  0.7       00:10 agent-app-leak
+  11162   11178 SNl   0.1  0.7       00:10 agent-app-leak
+
+timestamp=2026-06-05T03:50:31+09:00
+$ ps -L -p 11162 -o pid,tid,stat,pcpu,pmem,etime,comm
+    PID     TID STAT %CPU %MEM     ELAPSED COMMAND
+  11162   11162 SNl   0.1  2.6       00:49 agent-app-leak
+  11162   11177 SNl   1.2  2.6       00:46 agent-app-leak
+  11162   11178 SNl   0.2  2.6       00:46 agent-app-leak

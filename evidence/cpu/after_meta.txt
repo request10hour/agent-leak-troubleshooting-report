@@ -1,0 +1,62 @@
+label=after
+start_iso=2026-06-05T03:43:39+09:00
+app_path=./agent-app-leak
+MEMORY_LIMIT=512
+CPU_MAX_OCCUPY=10
+MULTI_THREAD_ENABLE=false
+AGENT_HOME=/home/c10hour0574/agent-leak-troubleshooting/agent_home
+AGENT_PORT=15034
+pid=10133
+observed_start_iso=2026-06-05T03:43:39+09:00
+observed_start_epoch=1780598619
+launcher_pid=10133
+observed_pid=10137
+planned_observation_seconds=45
+
+$ ps -ef | grep agent-app-leak | grep -v grep
+c10hour+   10133       1  6 03:43 ?        00:00:00 ./agent-app-leak
+c10hour+   10137   10133  5 03:43 ?        00:00:00 ./agent-app-leak
+observed_end_iso=2026-06-05T03:44:46+09:00
+observed_end_epoch=1780598686
+observed_duration_seconds=67
+process_alive_after_observation=yes
+cleanup_action=kill after evidence capture
+
+$ grep -Ei 'WATCHDOG|SIGTERM|CPU|Threshold|cooldown|Peak|terminate|terminating' evidence/cpu/after_app.log
+   ... MEMORY_LIMIT=512MB, CPU_MAX_OCCUPY=10%, MULTI_THREAD_ENABLE=False
+ [ CPU    ] Limit: 10%  		[ OK ]
+2026-06-05 03:43:42,444 [INFO] [CpuWorker] Started. Maximum CPU Limit: 10%
+2026-06-05 03:43:42,444 [INFO] [CpuWorker] Current Load: 5.00%
+2026-06-05 03:43:44,546 [INFO] [CpuWorker] Peak reached (10.00%). Starting cooldown...
+2026-06-05 03:43:45,546 [INFO] [CpuWorker] Current Load: 10.00%
+2026-06-05 03:43:47,649 [INFO] [CpuWorker] Cooldown complete (5.00%). Resuming load increase...
+2026-06-05 03:43:48,651 [INFO] [CpuWorker] Current Load: 5.00%
+2026-06-05 03:43:51,755 [INFO] [CpuWorker] Current Load: 7.37%
+2026-06-05 03:43:53,857 [INFO] [CpuWorker] Peak reached (10.00%). Starting cooldown...
+2026-06-05 03:43:54,859 [INFO] [CpuWorker] Current Load: 10.00%
+2026-06-05 03:43:56,959 [INFO] [CpuWorker] Cooldown complete (5.00%). Resuming load increase...
+2026-06-05 03:43:57,961 [INFO] [CpuWorker] Current Load: 5.00%
+2026-06-05 03:44:00,063 [INFO] [CpuWorker] Peak reached (10.00%). Starting cooldown...
+2026-06-05 03:44:01,064 [INFO] [CpuWorker] Current Load: 10.00%
+2026-06-05 03:44:03,165 [INFO] [CpuWorker] Cooldown complete (5.00%). Resuming load increase...
+2026-06-05 03:44:04,166 [INFO] [CpuWorker] Current Load: 5.00%
+2026-06-05 03:44:06,268 [INFO] [CpuWorker] Peak reached (10.00%). Starting cooldown...
+2026-06-05 03:44:07,269 [INFO] [CpuWorker] Current Load: 10.00%
+2026-06-05 03:44:09,371 [INFO] [CpuWorker] Cooldown complete (5.00%). Resuming load increase...
+2026-06-05 03:44:10,372 [INFO] [CpuWorker] Current Load: 5.00%
+2026-06-05 03:44:13,475 [INFO] [CpuWorker] Current Load: 7.25%
+2026-06-05 03:44:16,580 [INFO] [CpuWorker] Current Load: 9.10%
+2026-06-05 03:44:18,682 [INFO] [CpuWorker] Peak reached (10.00%). Starting cooldown...
+2026-06-05 03:44:19,684 [INFO] [CpuWorker] Current Load: 10.00%
+2026-06-05 03:44:22,787 [INFO] [CpuWorker] Current Load: 7.17%
+2026-06-05 03:44:25,889 [INFO] [CpuWorker] Current Load: 6.54%
+2026-06-05 03:44:28,002 [INFO] [CpuWorker] Cooldown complete (5.00%). Resuming load increase...
+2026-06-05 03:44:29,004 [INFO] [CpuWorker] Current Load: 5.00%
+2026-06-05 03:44:32,107 [INFO] [CpuWorker] Current Load: 6.42%
+2026-06-05 03:44:34,210 [INFO] [CpuWorker] Peak reached (10.00%). Starting cooldown...
+2026-06-05 03:44:35,211 [INFO] [CpuWorker] Current Load: 10.00%
+2026-06-05 03:44:38,317 [INFO] [CpuWorker] Current Load: 5.83%
+2026-06-05 03:44:40,419 [INFO] [CpuWorker] Cooldown complete (5.00%). Resuming load increase...
+2026-06-05 03:44:41,420 [INFO] [CpuWorker] Current Load: 5.00%
+2026-06-05 03:44:44,524 [INFO] [CpuWorker] Current Load: 6.87%
+2026-06-05 03:44:46,625 [INFO] [CpuWorker] Peak reached (10.00%). Starting cooldown...

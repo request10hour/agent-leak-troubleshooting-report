@@ -1,0 +1,7 @@
+agent_home/api_keys/secret.key
+agent_home/upload_files/
+agent_home/
+agent-app-leak
+*.zip
+__pycache__/
+*.tmp

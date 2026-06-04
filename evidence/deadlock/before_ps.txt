@@ -1,0 +1,9 @@
+timestamp=2026-06-05T03:48:28+09:00
+$ ps -ef | grep agent-app-leak | grep -v grep
+c10hour+   10960       1  0 03:48 ?        00:00:00 ./agent-app-leak
+c10hour+   10964   10960  0 03:48 ?        00:00:00 ./agent-app-leak
+
+timestamp=2026-06-05T03:49:04+09:00
+$ ps -ef | grep agent-app-leak | grep -v grep
+c10hour+   10960       1  0 03:48 ?        00:00:00 ./agent-app-leak
+c10hour+   10964   10960  0 03:48 ?        00:00:00 ./agent-app-leak

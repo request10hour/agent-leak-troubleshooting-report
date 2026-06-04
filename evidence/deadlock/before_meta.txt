@@ -1,0 +1,44 @@
+label=before
+start_iso=2026-06-05T03:48:15+09:00
+app_path=./agent-app-leak
+MEMORY_LIMIT=512
+CPU_MAX_OCCUPY=10
+MULTI_THREAD_ENABLE=true
+AGENT_HOME=/home/c10hour0574/agent-leak-troubleshooting/agent_home
+AGENT_PORT=15034
+pid=10960
+observed_start_iso=2026-06-05T03:48:15+09:00
+observed_start_epoch=1780598895
+launcher_pid=10960
+observed_pid=10964
+
+$ ps -ef | grep agent-app-leak | grep -v grep
+c10hour+   10960       1  7 03:48 ?        00:00:00 ./agent-app-leak
+c10hour+   10964   10960  5 03:48 ?        00:00:00 ./agent-app-leak
+observed_end_iso=2026-06-05T03:49:11+09:00
+observed_end_epoch=1780598951
+observed_duration_seconds=56
+process_alive_after_observation=yes
+log_size_t1_bytes=2693
+log_size_t2_bytes=2693
+log_size_changed=no
+last_log_t1=2026-06-05 03:48:24,750 [INFO] [AgentWorker][Worker-Thread-1] WAITING for [Socket_Pool_B]... (Status: BLOCKED)
+last_log_t2=2026-06-05 03:48:24,750 [INFO] [AgentWorker][Worker-Thread-1] WAITING for [Socket_Pool_B]... (Status: BLOCKED)
+cleanup_action=kill after deadlock evidence capture
+
+$ grep -Ei 'WAITING|BLOCKED|lock|deadlock|Thread|Scheduler' evidence/deadlock/before_app.log
+   ... MEMORY_LIMIT=512MB, CPU_MAX_OCCUPY=10%, MULTI_THREAD_ENABLE=True
+ [ THREAD ] Concurrency: True 		[ WARNING ]
+ >>> SYSTEM WARNING: POTENTIAL DEADLOCK IN CONCURRENT MODE.
+2026-06-05 03:48:17,747 [WARNING] [System] CAUTION: Strict resource locking is enabled.
+2026-06-05 03:48:22,748 [INFO] [Worker-Thread-1] Process Started. Attempting to lock [Shared_Memory_A]...
+2026-06-05 03:48:22,748 [INFO] [AgentWorker][Worker-Thread-2] Process Started. Attempting to lock [Socket_Pool_B]...
+2026-06-05 03:48:22,748 [INFO] [AgentWorker] Waiting for worker threads to complete transactions...
+2026-06-05 03:48:22,749 [INFO] [AgentWorker][Worker-Thread-2] LOCK ACQUIRED: [Socket_Pool_B]. (Holding...)
+2026-06-05 03:48:22,749 [INFO] [AgentWorker][Worker-Thread-2] Establishing network connections in Pool B...
+2026-06-05 03:48:22,748 [INFO] [AgentWorker][Worker-Thread-1] LOCK ACQUIRED: [Shared_Memory_A]. (Holding...)
+2026-06-05 03:48:22,749 [INFO] [AgentWorker][Worker-Thread-1] Processing critical data in Memory A...
+2026-06-05 03:48:24,749 [INFO] [AgentWorker][Worker-Thread-2] Need resource [Shared_Memory_A] to write logs.
+2026-06-05 03:48:24,750 [INFO] [AgentWorker][Worker-Thread-2] WAITING for [Shared_Memory_A]... (Status: BLOCKED)
+2026-06-05 03:48:24,750 [INFO] [AgentWorker][Worker-Thread-1] Need resource [Socket_Pool_B] to finish job.
+2026-06-05 03:48:24,750 [INFO] [AgentWorker][Worker-Thread-1] WAITING for [Socket_Pool_B]... (Status: BLOCKED)

@@ -1,0 +1,21 @@
+label=before
+start_iso=2026-06-05T03:38:10+09:00
+app_path=./agent-app-leak
+MEMORY_LIMIT=128
+CPU_MAX_OCCUPY=100
+MULTI_THREAD_ENABLE=false
+AGENT_HOME=/home/c10hour0574/agent-leak-troubleshooting/agent_home
+AGENT_PORT=15034
+pid=9049
+observed_start_iso=2026-06-05T03:38:10+09:00
+observed_start_epoch=1780598290
+launcher_pid=9049
+observed_pid=9053
+
+$ ps -ef | grep agent-app-leak | grep -v grep
+c10hour+    9049       1  5 03:38 ?        00:00:00 ./agent-app-leak
+c10hour+    9053    9049  6 03:38 ?        00:00:00 ./agent-app-leak
+observed_end_iso=2026-06-05T03:38:29+09:00
+observed_end_epoch=1780598309
+observed_duration_seconds=19
+process_alive_after_observation=no

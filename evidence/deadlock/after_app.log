@@ -1,0 +1,98 @@
+>>> Starting Agent Boot Sequence...
+[1/6] Checking User Account               [OK]
+   ... Running as service user 'c10hour0574' (uid=1267600506)
+[2/6] Verifying Environment Variables     [OK]
+   ... All required Envs correct
+[3/6] Checking Required Files             [OK]
+   ... Verified 'secret.key' with correct key string.
+[4/6] Checking Port Availability          [OK]
+   ... Port 15034 is available.
+[5/6] Verifying Log Permission            [OK]
+   ... Log directory is writable: /home/c10hour0574/agent-leak-troubleshooting/agent_home/logs
+[6/6] Verifying Mission Environment       [OK]
+   ... MEMORY_LIMIT=512MB, CPU_MAX_OCCUPY=10%, MULTI_THREAD_ENABLE=False
+------------------------------------------------------------
+All Boot Checks Passed!
+Agent READY
+2026-06-05 03:49:41,950 [INFO] [SafetyGuard] Process priority lowered (nice=10).
+2026-06-05 03:49:41,950 [INFO] Agent listening at port 15034
+
+==================================================
+ [ Agent Initiate ] Resource Check 
+==================================================
+ [ MEMORY ] Limit: 512MB 		[ OK ]
+ [ CPU    ] Limit: 10%  		[ OK ]
+ [ THREAD ] Concurrency: False 		[ OK ]
+--------------------------------------------------
+ >>> SYSTEM STATUS: STABLE. STARTING WORKLOAD MONITORING...
+==================================================
+
+2026-06-05 03:49:43,951 [INFO] >>> Scenario Selected: [Healthy System Monitoring]
+
+>>> [SYSTEM] ALL CONFIGURATIONS OPTIMAL. RUNNING STABILITY TEST... <<<
+
+2026-06-05 03:49:43,952 [INFO] [Scheduler] Task Scheduler Initialized.
+2026-06-05 03:49:43,952 [INFO] [Scheduler] Registered Tasks: ['Thread-A', 'Thread-B', 'Thread-C']
+2026-06-05 03:49:43,952 [INFO] [Scheduler] Starting task execution...
+2026-06-05 03:49:43,952 [INFO] [Thread-A] Task Started. Calculating... (20%)
+2026-06-05 03:49:44,002 [INFO] [Thread-A] Calculating... (40%)
+2026-06-05 03:49:44,053 [INFO] [Thread-A] Calculating... (60%)
+2026-06-05 03:49:44,104 [INFO] [Thread-A] Calculating... (80%)
+2026-06-05 03:49:44,154 [INFO] [Thread-A] Task Completed. (100%)
+2026-06-05 03:49:44,206 [INFO] [Thread-B] Task Started. Calculating... (20%)
+2026-06-05 03:49:44,257 [INFO] [Thread-B] Calculating... (40%)
+2026-06-05 03:49:44,308 [INFO] [Thread-B] Calculating... (60%)
+2026-06-05 03:49:44,359 [INFO] [Thread-B] Calculating... (80%)
+2026-06-05 03:49:44,411 [INFO] [Thread-B] Task Completed. (100%)
+2026-06-05 03:49:44,462 [INFO] [Thread-C] Task Started. Calculating... (20%)
+2026-06-05 03:49:44,513 [INFO] [Thread-C] Calculating... (40%)
+2026-06-05 03:49:44,565 [INFO] [Thread-C] Calculating... (60%)
+2026-06-05 03:49:44,616 [INFO] [Thread-C] Calculating... (80%)
+2026-06-05 03:49:44,667 [INFO] [Thread-C] Task Completed. (100%)
+2026-06-05 03:49:44,719 [INFO] [Scheduler] All tasks completed.
+2026-06-05 03:49:44,756 [INFO] [MemoryWorker] Current Heap: 25MB
+2026-06-05 03:49:44,756 [INFO] [CpuWorker] Started. Maximum CPU Limit: 10%
+2026-06-05 03:49:44,757 [INFO] [CpuWorker] Current Load: 5.00%
+2026-06-05 03:49:46,858 [INFO] [CpuWorker] Peak reached (10.00%). Starting cooldown...
+2026-06-05 03:49:47,793 [INFO] [MemoryWorker] Current Heap: 50MB
+2026-06-05 03:49:47,859 [INFO] [CpuWorker] Current Load: 10.00%
+2026-06-05 03:49:49,961 [INFO] [CpuWorker] Cooldown complete (5.00%). Resuming load increase...
+2026-06-05 03:49:50,832 [INFO] [MemoryWorker] Current Heap: 75MB
+2026-06-05 03:49:50,963 [INFO] [CpuWorker] Current Load: 5.00%
+2026-06-05 03:49:53,871 [INFO] [MemoryWorker] Current Heap: 100MB
+2026-06-05 03:49:54,065 [INFO] [CpuWorker] Current Load: 5.09%
+2026-06-05 03:49:56,168 [INFO] [CpuWorker] Peak reached (10.00%). Starting cooldown...
+2026-06-05 03:49:56,909 [INFO] [MemoryWorker] Current Heap: 125MB
+2026-06-05 03:49:57,169 [INFO] [CpuWorker] Current Load: 10.00%
+2026-06-05 03:49:59,948 [INFO] [MemoryWorker] Current Heap: 150MB
+2026-06-05 03:50:00,273 [INFO] [CpuWorker] Current Load: 6.21%
+2026-06-05 03:50:02,376 [INFO] [CpuWorker] Cooldown complete (5.00%). Resuming load increase...
+2026-06-05 03:50:02,985 [INFO] [MemoryWorker] Current Heap: 175MB
+2026-06-05 03:50:03,377 [INFO] [CpuWorker] Current Load: 5.00%
+2026-06-05 03:50:06,025 [INFO] [MemoryWorker] Current Heap: 200MB
+2026-06-05 03:50:06,480 [INFO] [CpuWorker] Current Load: 7.59%
+2026-06-05 03:50:08,583 [INFO] [CpuWorker] Peak reached (10.00%). Starting cooldown...
+2026-06-05 03:50:09,061 [INFO] [MemoryWorker] Current Heap: 225MB
+2026-06-05 03:50:09,584 [INFO] [CpuWorker] Current Load: 10.00%
+2026-06-05 03:50:11,688 [INFO] [CpuWorker] Cooldown complete (5.00%). Resuming load increase...
+2026-06-05 03:50:12,099 [INFO] [MemoryWorker] Current Heap: 250MB
+2026-06-05 03:50:12,689 [INFO] [CpuWorker] Current Load: 5.00%
+2026-06-05 03:50:14,792 [INFO] [CpuWorker] Peak reached (10.00%). Starting cooldown...
+2026-06-05 03:50:15,137 [INFO] [MemoryWorker] Current Heap: 275MB
+2026-06-05 03:50:15,792 [INFO] [CpuWorker] Current Load: 10.00%
+2026-06-05 03:50:18,166 [INFO] [MemoryWorker] Current Heap: 300MB
+2026-06-05 03:50:18,895 [INFO] [CpuWorker] Current Load: 5.27%
+2026-06-05 03:50:21,203 [INFO] [MemoryWorker] Current Heap: 325MB
+2026-06-05 03:50:21,998 [INFO] [CpuWorker] Current Load: 5.25%
+2026-06-05 03:50:24,100 [INFO] [CpuWorker] Cooldown complete (5.00%). Resuming load increase...
+2026-06-05 03:50:24,239 [INFO] [MemoryWorker] Current Heap: 350MB
+2026-06-05 03:50:25,101 [INFO] [CpuWorker] Current Load: 5.00%
+2026-06-05 03:50:27,277 [INFO] [MemoryWorker] Current Heap: 375MB
+2026-06-05 03:50:28,205 [INFO] [CpuWorker] Current Load: 6.03%
+2026-06-05 03:50:30,315 [INFO] [CpuWorker] Peak reached (10.00%). Starting cooldown...
+2026-06-05 03:50:30,315 [INFO] [MemoryWorker] Current Heap: 400MB
+2026-06-05 03:50:31,316 [INFO] [CpuWorker] Current Load: 10.00%
+2026-06-05 03:50:33,354 [INFO] [MemoryWorker] Current Heap: 425MB
+2026-06-05 03:50:33,418 [INFO] [CpuWorker] Cooldown complete (5.00%). Resuming load increase...
+2026-06-05 03:50:34,420 [INFO] [CpuWorker] Current Load: 5.00%
+2026-06-05 03:50:36,392 [INFO] [MemoryWorker] Current Heap: 450MB
