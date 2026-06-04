@@ -15,7 +15,7 @@ Diagram:
 
 ![Deadlock wait-for graph](../../evidence/graphs/03_deadlock_wait_for_graph.svg)
 
-이 그림은 마지막 로그의 lock 관계를 시각화한 것이다. Worker-Thread-1은 `Shared_Memory_A`를 잡은 상태에서 `Socket_Pool_B`를 기다리고, Worker-Thread-2는 `Socket_Pool_B`를 잡은 상태에서 `Shared_Memory_A`를 기다린다. 이 순환 대기 때문에 PID는 살아 있지만 작업이 더 이상 진행되지 않는다.
+이 그림은 마지막 로그의 순환 대기 관계만 단순화한 것이다. `T1`은 `A`를 가진 채 `B`를 기다리고, `T2`는 `B`를 가진 채 `A`를 기다린다. 실제 PID, CPU/MEM 정체, WAITING/BLOCKED 로그는 아래 Evidence에 원문으로 남겼다.
 
 - 파일:
   - `evidence/deadlock/before_app.log`

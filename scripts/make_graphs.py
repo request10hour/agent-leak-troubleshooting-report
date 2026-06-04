@@ -365,57 +365,48 @@ def svg_cpu_graph(before: list[tuple[float, float]], after: list[tuple[float, fl
 
 
 def svg_deadlock_diagram(out_path: Path) -> None:
-    """Write a wait-for graph from existing deadlock evidence."""
+    """Write a compact wait-for graph from existing deadlock evidence."""
     require_text(
         ROOT / "evidence" / "deadlock" / "before_app.log",
         ["Worker-Thread-1", "Worker-Thread-2", "Shared_Memory_A", "Socket_Pool_B", "WAITING", "BLOCKED"],
     )
     require_text(ROOT / "docs" / "issues" / "03_deadlock.md", ["10964", "2693", "21708KB", "3538", "5662"])
 
-    width, height = 1100, 620
+    width, height = 900, 520
     lines = [
         f'<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" viewBox="0 0 {width} {height}">',
-        "<title>Deadlock Wait-For Graph</title>",
-        "<desc>Deadlock evidence includes Worker-Thread-1, Worker-Thread-2, Shared_Memory_A, Socket_Pool_B, WAITING, BLOCKED, PID 10964, log size 2693, RSS 21708KB, and log growth 3538 to 5662.</desc>",
+        "<title>Deadlock: Circular Wait</title>",
+        "<desc>Compact wait-for graph: T1 waits for B, B is held by T2, T2 waits for A, and A is held by T1.</desc>",
         '<defs><marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0, 10 3.5, 0 7" fill="context-stroke"/></marker></defs>',
         '<rect width="100%" height="100%" fill="white"/>',
-        text(60, 42, "Deadlock Wait-For Graph", 24, "#212529", "bold"),
-        text(60, 68, "Circular wait detected: no worker thread can make progress", 14, "#c92a2a", "bold"),
+        text(60, 42, "Deadlock: Circular Wait", 24, "#212529", "bold"),
     ]
 
-    # Node positions are fixed so the circular wait is visible at a glance.
-    shared = (80, 105, 260, 105)
-    thread1 = (740, 105, 280, 120)
-    socket = (740, 335, 260, 105)
-    thread2 = (80, 335, 280, 120)
+    # Four large nodes keep the circular wait visible without evidence clutter.
+    t1 = (120, 105, 140, 84)
+    b = (640, 105, 140, 84)
+    t2 = (640, 315, 140, 84)
+    a = (120, 315, 140, 84)
 
-    lines.extend(rect_node(*shared, "Shared_Memory_A", ["locked resource"], "#e7f5ff", "#1864ab", 18))
-    lines.extend(rect_node(*thread1, "Worker-Thread-1", ["holds: Shared_Memory_A", "waits: Socket_Pool_B"], "#fff5f5", "#c92a2a", 8))
-    lines.extend(rect_node(*socket, "Socket_Pool_B", ["locked resource"], "#e7f5ff", "#1864ab", 18))
-    lines.extend(rect_node(*thread2, "Worker-Thread-2", ["holds: Socket_Pool_B", "waits: Shared_Memory_A"], "#fff5f5", "#c92a2a", 8))
+    lines.extend(rect_node(*t1, "T1", ["thread"], "#fff5f5", "#c92a2a", 8))
+    lines.extend(rect_node(*b, "B", ["resource"], "#e7f5ff", "#1864ab", 18))
+    lines.extend(rect_node(*t2, "T2", ["thread"], "#fff5f5", "#c92a2a", 8))
+    lines.extend(rect_node(*a, "A", ["resource"], "#e7f5ff", "#1864ab", 18))
 
-    lines.extend(arrow(340, 157, 740, 157, "held by", "#1864ab", False, -36, -12))
-    lines.extend(arrow(880, 225, 880, 335, "waiting for", "#c92a2a", True, 15, -3))
-    lines.extend(arrow(740, 387, 360, 395, "held by", "#1864ab", False, -30, -14))
-    lines.extend(arrow(220, 335, 220, 210, "waiting for", "#c92a2a", True, 14, 0))
+    lines.extend(arrow(260, 147, 640, 147, "waits", "#c92a2a", True, -18, -14))
+    lines.extend(arrow(710, 189, 710, 315, "held", "#1864ab", False, 18, 0))
+    lines.extend(arrow(640, 357, 260, 357, "waits", "#c92a2a", True, -18, -14))
+    lines.extend(arrow(190, 315, 190, 189, "held", "#1864ab", False, 18, 0))
 
     lines.extend(
         [
-            '<rect x="407" y="242" width="286" height="88" rx="10" fill="#fff9db" stroke="#f08c00" stroke-width="2"/>',
-            text(432, 274, "Circular wait", 18, "#e67700", "bold"),
-            text(432, 301, "Thread-1 waits for B", 13, "#5f3dc4"),
-            text(432, 322, "Thread-2 waits for A", 13, "#5f3dc4"),
-            '<rect x="60" y="500" width="470" height="92" rx="8" fill="#f8f9fa" stroke="#adb5bd"/>',
-            text(82, 526, "Observed Symptoms", 15, "#212529", "bold"),
-            text(82, 550, "PID 10964 alive | log size 2693 -> 2693 bytes", 12, "#495057"),
-            text(82, 571, "CPU 0.4% -> 0.1% | RSS 21708KB unchanged", 12, "#495057"),
-            text(82, 592, "last logs: WAITING / BLOCKED", 12, "#495057"),
-            '<rect x="570" y="500" width="470" height="92" rx="8" fill="#f8f9fa" stroke="#adb5bd"/>',
-            text(592, 526, "Workaround Verification", 15, "#212529", "bold"),
-            text(592, 550, "MULTI_THREAD_ENABLE=true  -> log stopped", 12, "#495057"),
-            text(592, 571, "MULTI_THREAD_ENABLE=false -> log grew 3538 -> 5662 bytes", 12, "#495057"),
-            text(592, 592, "Thread-A/B/C completed", 12, "#495057"),
-            text(60, 610, "Evidence is based on before_app.log plus ps/top snapshots. Diagram is a visual summary, not a replacement for raw logs.", 11, "#495057"),
+            '<rect x="334" y="226" width="232" height="68" rx="12" fill="#fff9db" stroke="#f08c00" stroke-width="2"/>',
+            text(372, 268, "Circular Wait", 22, "#e67700", "bold"),
+            '<line x1="282" y1="440" x2="322" y2="440" stroke="#1864ab" stroke-width="3"/>',
+            text(334, 445, "solid = held by", 12, "#212529"),
+            '<line x1="490" y1="440" x2="530" y2="440" stroke="#c92a2a" stroke-width="3" stroke-dasharray="7 5"/>',
+            text(542, 445, "dashed = waits for", 12, "#212529"),
+            text(128, 482, "T1=Worker-Thread-1, T2=Worker-Thread-2, A=Shared_Memory_A, B=Socket_Pool_B", 12, "#495057"),
             "</svg>",
         ]
     )
