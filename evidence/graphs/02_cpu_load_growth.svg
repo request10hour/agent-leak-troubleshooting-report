@@ -1,88 +1,102 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="900" height="520" viewBox="0 0 900 520">
-<title>CPU Load Growth</title>
-<desc>Source values include 57.45 and 10.00 from CpuWorker logs.</desc>
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="500" viewBox="0 0 1000 500">
+<title>CPU Load from CpuWorker logs</title>
+<desc>Source values include 57.45, 10.00, CPU Threshold Violated, 50 guideline, and 10 target from existing evidence logs.</desc>
 <rect width="100%" height="100%" fill="white"/>
-<text x="80" y="35" font-family="monospace" font-size="22" font-weight="bold">CPU Load Growth</text>
-<line x1="80" y1="400" x2="800" y2="400" stroke="#333"/>
-<line x1="80" y1="60" x2="80" y2="400" stroke="#333"/>
-<text x="370" y="450" font-family="monospace" font-size="15">elapsed seconds</text>
-<text x="18" y="230" font-family="monospace" font-size="15" transform="rotate(-90 18,230)">CpuWorker Load %</text>
-<line x1="80.0" y1="60" x2="80.0" y2="400" stroke="#eee"/>
-<text x="68.0" y="422" font-family="monospace" font-size="12">0</text>
-<line x1="224.0" y1="60" x2="224.0" y2="400" stroke="#eee"/>
-<text x="212.0" y="422" font-family="monospace" font-size="12">13</text>
-<line x1="368.0" y1="60" x2="368.0" y2="400" stroke="#eee"/>
-<text x="356.0" y="422" font-family="monospace" font-size="12">26</text>
-<line x1="512.0" y1="60" x2="512.0" y2="400" stroke="#eee"/>
-<text x="500.0" y="422" font-family="monospace" font-size="12">39</text>
-<line x1="656.0" y1="60" x2="656.0" y2="400" stroke="#eee"/>
-<text x="644.0" y="422" font-family="monospace" font-size="12">51</text>
-<line x1="800.0" y1="60" x2="800.0" y2="400" stroke="#eee"/>
-<text x="788.0" y="422" font-family="monospace" font-size="12">64</text>
-<line x1="80" y1="400.0" x2="800" y2="400.0" stroke="#eee"/>
-<text x="20" y="404.0" font-family="monospace" font-size="12">0.0</text>
-<line x1="80" y1="332.0" x2="800" y2="332.0" stroke="#eee"/>
-<text x="20" y="336.0" font-family="monospace" font-size="12">12.6</text>
-<line x1="80" y1="264.0" x2="800" y2="264.0" stroke="#eee"/>
-<text x="20" y="268.0" font-family="monospace" font-size="12">25.3</text>
-<line x1="80" y1="196.0" x2="800" y2="196.0" stroke="#eee"/>
-<text x="20" y="200.0" font-family="monospace" font-size="12">37.9</text>
-<line x1="80" y1="128.0" x2="800" y2="128.0" stroke="#eee"/>
-<text x="20" y="132.0" font-family="monospace" font-size="12">50.6</text>
-<line x1="80" y1="60.0" x2="800" y2="60.0" stroke="#eee"/>
-<text x="20" y="64.0" font-family="monospace" font-size="12">63.2</text>
-<polyline points="80.0,373.1 114.8,372.4 149.6,353.9 184.5,345.7 219.3,317.2 254.1,308.1 288.9,293.3 323.8,242.3 358.6,211.6 393.4,209.3 428.2,184.0 463.0,146.6 497.9,135.6 532.7,90.9" fill="none" stroke="#c92a2a" stroke-width="3"/>
-<circle cx="80.0" cy="373.1" r="3" fill="#c92a2a"/>
-<circle cx="114.8" cy="372.4" r="3" fill="#c92a2a"/>
-<circle cx="149.6" cy="353.9" r="3" fill="#c92a2a"/>
-<circle cx="184.5" cy="345.7" r="3" fill="#c92a2a"/>
-<circle cx="219.3" cy="317.2" r="3" fill="#c92a2a"/>
-<circle cx="254.1" cy="308.1" r="3" fill="#c92a2a"/>
-<circle cx="288.9" cy="293.3" r="3" fill="#c92a2a"/>
-<circle cx="323.8" cy="242.3" r="3" fill="#c92a2a"/>
-<circle cx="358.6" cy="211.6" r="3" fill="#c92a2a"/>
-<circle cx="393.4" cy="209.3" r="3" fill="#c92a2a"/>
-<circle cx="428.2" cy="184.0" r="3" fill="#c92a2a"/>
-<circle cx="463.0" cy="146.6" r="3" fill="#c92a2a"/>
-<circle cx="497.9" cy="135.6" r="3" fill="#c92a2a"/>
-<circle cx="532.7" cy="90.9" r="3" fill="#c92a2a"/>
-<rect x="825" y="48" width="16" height="4" fill="#c92a2a"/>
-<text x="848" y="55" font-family="monospace" font-size="14">Before CPU_MAX_OCCUPY=100</text>
-<polyline points="80.0,373.1 103.6,346.2 114.8,346.2 138.4,373.1 149.6,373.1 184.5,360.3 208.0,346.2 219.3,346.2 242.8,373.1 254.1,373.1 277.7,346.2 288.9,346.2 312.5,373.1 323.7,373.1 347.3,346.2 358.5,346.2 382.1,373.1 393.3,373.1 428.1,361.0 462.9,351.0 486.5,346.2 497.8,346.2 532.6,361.4 567.4,364.8 591.1,373.1 602.3,373.1 637.1,365.5 660.7,346.2 672.0,346.2 706.8,368.6 730.4,373.1 741.6,373.1 776.4,363.0 800.0,346.2" fill="none" stroke="#2b8a3e" stroke-width="3"/>
-<circle cx="80.0" cy="373.1" r="3" fill="#2b8a3e"/>
-<circle cx="103.6" cy="346.2" r="3" fill="#2b8a3e"/>
-<circle cx="114.8" cy="346.2" r="3" fill="#2b8a3e"/>
-<circle cx="138.4" cy="373.1" r="3" fill="#2b8a3e"/>
-<circle cx="149.6" cy="373.1" r="3" fill="#2b8a3e"/>
-<circle cx="184.5" cy="360.3" r="3" fill="#2b8a3e"/>
-<circle cx="208.0" cy="346.2" r="3" fill="#2b8a3e"/>
-<circle cx="219.3" cy="346.2" r="3" fill="#2b8a3e"/>
-<circle cx="242.8" cy="373.1" r="3" fill="#2b8a3e"/>
-<circle cx="254.1" cy="373.1" r="3" fill="#2b8a3e"/>
-<circle cx="277.7" cy="346.2" r="3" fill="#2b8a3e"/>
-<circle cx="288.9" cy="346.2" r="3" fill="#2b8a3e"/>
-<circle cx="312.5" cy="373.1" r="3" fill="#2b8a3e"/>
-<circle cx="323.7" cy="373.1" r="3" fill="#2b8a3e"/>
-<circle cx="347.3" cy="346.2" r="3" fill="#2b8a3e"/>
-<circle cx="358.5" cy="346.2" r="3" fill="#2b8a3e"/>
-<circle cx="382.1" cy="373.1" r="3" fill="#2b8a3e"/>
-<circle cx="393.3" cy="373.1" r="3" fill="#2b8a3e"/>
-<circle cx="428.1" cy="361.0" r="3" fill="#2b8a3e"/>
-<circle cx="462.9" cy="351.0" r="3" fill="#2b8a3e"/>
-<circle cx="486.5" cy="346.2" r="3" fill="#2b8a3e"/>
-<circle cx="497.8" cy="346.2" r="3" fill="#2b8a3e"/>
-<circle cx="532.6" cy="361.4" r="3" fill="#2b8a3e"/>
-<circle cx="567.4" cy="364.8" r="3" fill="#2b8a3e"/>
-<circle cx="591.1" cy="373.1" r="3" fill="#2b8a3e"/>
-<circle cx="602.3" cy="373.1" r="3" fill="#2b8a3e"/>
-<circle cx="637.1" cy="365.5" r="3" fill="#2b8a3e"/>
-<circle cx="660.7" cy="346.2" r="3" fill="#2b8a3e"/>
-<circle cx="672.0" cy="346.2" r="3" fill="#2b8a3e"/>
-<circle cx="706.8" cy="368.6" r="3" fill="#2b8a3e"/>
-<circle cx="730.4" cy="373.1" r="3" fill="#2b8a3e"/>
-<circle cx="741.6" cy="373.1" r="3" fill="#2b8a3e"/>
-<circle cx="776.4" cy="363.0" r="3" fill="#2b8a3e"/>
-<circle cx="800.0" cy="346.2" r="3" fill="#2b8a3e"/>
-<rect x="825" y="74" width="16" height="4" fill="#2b8a3e"/>
-<text x="848" y="81" font-family="monospace" font-size="14">After CPU_MAX_OCCUPY=10</text>
+<text x="60.0" y="36.0" font-family="monospace" font-size="22" font-weight="bold" fill="#212529">CPU Load from CpuWorker logs</text>
+<line x1="78" y1="360" x2="878" y2="360" stroke="#343a40"/>
+<line x1="78" y1="70" x2="78" y2="360" stroke="#343a40"/>
+<line x1="78.0" y1="70" x2="78.0" y2="360" stroke="#edf2f7"/>
+<text x="70.0" y="380.0" font-family="monospace" font-size="11" font-weight="normal" fill="#495057">0</text>
+<line x1="201.1" y1="70" x2="201.1" y2="360" stroke="#edf2f7"/>
+<text x="193.1" y="380.0" font-family="monospace" font-size="11" font-weight="normal" fill="#495057">10</text>
+<line x1="324.2" y1="70" x2="324.2" y2="360" stroke="#edf2f7"/>
+<text x="316.2" y="380.0" font-family="monospace" font-size="11" font-weight="normal" fill="#495057">20</text>
+<line x1="447.2" y1="70" x2="447.2" y2="360" stroke="#edf2f7"/>
+<text x="439.2" y="380.0" font-family="monospace" font-size="11" font-weight="normal" fill="#495057">30</text>
+<line x1="570.3" y1="70" x2="570.3" y2="360" stroke="#edf2f7"/>
+<text x="562.3" y="380.0" font-family="monospace" font-size="11" font-weight="normal" fill="#495057">40</text>
+<line x1="693.4" y1="70" x2="693.4" y2="360" stroke="#edf2f7"/>
+<text x="685.4" y="380.0" font-family="monospace" font-size="11" font-weight="normal" fill="#495057">50</text>
+<line x1="816.5" y1="70" x2="816.5" y2="360" stroke="#edf2f7"/>
+<text x="808.5" y="380.0" font-family="monospace" font-size="11" font-weight="normal" fill="#495057">60</text>
+<line x1="78" y1="360.0" x2="878" y2="360.0" stroke="#edf2f7"/>
+<text x="40.0" y="364.0" font-family="monospace" font-size="11" font-weight="normal" fill="#495057">0</text>
+<line x1="78" y1="311.7" x2="878" y2="311.7" stroke="#edf2f7"/>
+<text x="40.0" y="315.7" font-family="monospace" font-size="11" font-weight="normal" fill="#495057">10</text>
+<line x1="78" y1="263.3" x2="878" y2="263.3" stroke="#edf2f7"/>
+<text x="40.0" y="267.3" font-family="monospace" font-size="11" font-weight="normal" fill="#495057">20</text>
+<line x1="78" y1="215.0" x2="878" y2="215.0" stroke="#edf2f7"/>
+<text x="40.0" y="219.0" font-family="monospace" font-size="11" font-weight="normal" fill="#495057">30</text>
+<line x1="78" y1="166.7" x2="878" y2="166.7" stroke="#edf2f7"/>
+<text x="40.0" y="170.7" font-family="monospace" font-size="11" font-weight="normal" fill="#495057">40</text>
+<line x1="78" y1="118.3" x2="878" y2="118.3" stroke="#edf2f7"/>
+<text x="40.0" y="122.3" font-family="monospace" font-size="11" font-weight="normal" fill="#495057">50</text>
+<line x1="78" y1="70.0" x2="878" y2="70.0" stroke="#edf2f7"/>
+<text x="40.0" y="74.0" font-family="monospace" font-size="11" font-weight="normal" fill="#495057">60</text>
+<text x="18" y="215.0" font-family="monospace" font-size="13" fill="#212529" transform="rotate(-90 18,215.0)">CpuWorker Load %</text>
+<line x1="78" y1="311.7" x2="878" y2="311.7" stroke="#2b8a3e" stroke-dasharray="7 5"/>
+<text x="752.0" y="304.7" font-family="monospace" font-size="12" font-weight="normal" fill="#2b8a3e">10% target</text>
+<line x1="78" y1="118.3" x2="878" y2="118.3" stroke="#f08c00" stroke-dasharray="7 5"/>
+<text x="752.0" y="111.3" font-family="monospace" font-size="12" font-weight="normal" fill="#f08c00">50% guideline</text>
+<polyline points="78.0,335.8 116.2,335.2 154.4,318.6 192.6,311.2 230.8,285.6 269.0,277.4 307.2,264.2 345.4,218.3 383.7,190.7 421.9,188.7 460.1,166.0 498.2,132.3 536.4,122.4 574.6,82.3 575.9,82.3" fill="none" stroke="#c92a2a" stroke-width="3"/>
+<circle cx="78.0" cy="335.8" r="3" fill="#c92a2a"/>
+<circle cx="116.2" cy="335.2" r="3" fill="#c92a2a"/>
+<circle cx="154.4" cy="318.6" r="3" fill="#c92a2a"/>
+<circle cx="192.6" cy="311.2" r="3" fill="#c92a2a"/>
+<circle cx="230.8" cy="285.6" r="3" fill="#c92a2a"/>
+<circle cx="269.0" cy="277.4" r="3" fill="#c92a2a"/>
+<circle cx="307.2" cy="264.2" r="3" fill="#c92a2a"/>
+<circle cx="345.4" cy="218.3" r="3" fill="#c92a2a"/>
+<circle cx="383.7" cy="190.7" r="3" fill="#c92a2a"/>
+<circle cx="421.9" cy="188.7" r="3" fill="#c92a2a"/>
+<circle cx="460.1" cy="166.0" r="3" fill="#c92a2a"/>
+<circle cx="498.2" cy="132.3" r="3" fill="#c92a2a"/>
+<circle cx="536.4" cy="122.4" r="3" fill="#c92a2a"/>
+<circle cx="574.6" cy="82.3" r="3" fill="#c92a2a"/>
+<circle cx="575.9" cy="82.3" r="3" fill="#c92a2a"/>
+<polyline points="78.0,335.8 103.9,311.7 116.2,311.7 142.1,335.8 154.4,335.8 192.6,324.4 218.5,311.7 230.8,311.7 256.6,335.8 269.0,335.8 294.8,311.7 307.2,311.7 333.0,335.8 345.3,335.8 371.2,311.7 383.5,311.7 409.4,335.8 421.7,335.8 459.9,325.0 498.1,316.0 524.0,311.7 536.3,311.7 574.5,325.3 612.7,328.4 638.7,335.8 651.0,335.8 689.2,329.0 715.1,311.7 727.4,311.7 765.7,331.8 791.5,335.8 803.9,335.8 842.1,326.8 867.9,311.7" fill="none" stroke="#2b8a3e" stroke-width="3"/>
+<circle cx="78.0" cy="335.8" r="3" fill="#2b8a3e"/>
+<circle cx="103.9" cy="311.7" r="3" fill="#2b8a3e"/>
+<circle cx="116.2" cy="311.7" r="3" fill="#2b8a3e"/>
+<circle cx="142.1" cy="335.8" r="3" fill="#2b8a3e"/>
+<circle cx="154.4" cy="335.8" r="3" fill="#2b8a3e"/>
+<circle cx="192.6" cy="324.4" r="3" fill="#2b8a3e"/>
+<circle cx="218.5" cy="311.7" r="3" fill="#2b8a3e"/>
+<circle cx="230.8" cy="311.7" r="3" fill="#2b8a3e"/>
+<circle cx="256.6" cy="335.8" r="3" fill="#2b8a3e"/>
+<circle cx="269.0" cy="335.8" r="3" fill="#2b8a3e"/>
+<circle cx="294.8" cy="311.7" r="3" fill="#2b8a3e"/>
+<circle cx="307.2" cy="311.7" r="3" fill="#2b8a3e"/>
+<circle cx="333.0" cy="335.8" r="3" fill="#2b8a3e"/>
+<circle cx="345.3" cy="335.8" r="3" fill="#2b8a3e"/>
+<circle cx="371.2" cy="311.7" r="3" fill="#2b8a3e"/>
+<circle cx="383.5" cy="311.7" r="3" fill="#2b8a3e"/>
+<circle cx="409.4" cy="335.8" r="3" fill="#2b8a3e"/>
+<circle cx="421.7" cy="335.8" r="3" fill="#2b8a3e"/>
+<circle cx="459.9" cy="325.0" r="3" fill="#2b8a3e"/>
+<circle cx="498.1" cy="316.0" r="3" fill="#2b8a3e"/>
+<circle cx="524.0" cy="311.7" r="3" fill="#2b8a3e"/>
+<circle cx="536.3" cy="311.7" r="3" fill="#2b8a3e"/>
+<circle cx="574.5" cy="325.3" r="3" fill="#2b8a3e"/>
+<circle cx="612.7" cy="328.4" r="3" fill="#2b8a3e"/>
+<circle cx="638.7" cy="335.8" r="3" fill="#2b8a3e"/>
+<circle cx="651.0" cy="335.8" r="3" fill="#2b8a3e"/>
+<circle cx="689.2" cy="329.0" r="3" fill="#2b8a3e"/>
+<circle cx="715.1" cy="311.7" r="3" fill="#2b8a3e"/>
+<circle cx="727.4" cy="311.7" r="3" fill="#2b8a3e"/>
+<circle cx="765.7" cy="331.8" r="3" fill="#2b8a3e"/>
+<circle cx="791.5" cy="335.8" r="3" fill="#2b8a3e"/>
+<circle cx="803.9" cy="335.8" r="3" fill="#2b8a3e"/>
+<circle cx="842.1" cy="326.8" r="3" fill="#2b8a3e"/>
+<circle cx="867.9" cy="311.7" r="3" fill="#2b8a3e"/>
+<line x1="575.9" y1="70" x2="575.9" y2="360" stroke="#c92a2a" stroke-dasharray="4 4"/>
+<circle cx="575.9" cy="82.3" r="6" fill="#c92a2a" stroke="#7f1d1d" stroke-width="2"/>
+<text x="585.9" y="84.0" font-family="monospace" font-size="12" font-weight="bold" fill="#c92a2a">CPU Threshold Violated! (57.45%)</text>
+<text x="585.9" y="102.0" font-family="monospace" font-size="11" font-weight="normal" fill="#c92a2a">violation / PID missing</text>
+<rect x="100" y="388" width="20" height="4" fill="#c92a2a"/>
+<text x="128.0" y="393.0" font-family="monospace" font-size="12" font-weight="normal" fill="#212529">Before: CPU_MAX_OCCUPY=100</text>
+<rect x="360" y="388" width="20" height="4" fill="#2b8a3e"/>
+<text x="388.0" y="393.0" font-family="monospace" font-size="12" font-weight="normal" fill="#212529">After: CPU_MAX_OCCUPY=10</text>
+<text x="366.0" y="430.0" font-family="monospace" font-size="13" font-weight="normal" fill="#212529">elapsed seconds from CpuWorker log start</text>
+<text x="78.0" y="466.0" font-family="monospace" font-size="12" font-weight="normal" fill="#495057">CPU values are app-internal CpuWorker load values. top/ps evidence is preserved in evidence/cpu/.</text>
 </svg>

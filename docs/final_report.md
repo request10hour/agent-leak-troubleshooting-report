@@ -47,7 +47,8 @@ GUI Capture Method:
 Graph Evidence:
 - OOM RSS growth: evidence/graphs/01_oom_rss_growth.svg
 - CPU load growth: evidence/graphs/02_cpu_load_growth.svg
-- OOM graph uses collapsed RSS change points for readability while preserving raw logs.
+- OOM graph uses two panels for Before/After, collapsed RSS change points, MEMORY_LIMIT lines, and process_missing markers while preserving raw logs.
+- CPU graph uses fixed 0-60% y-axis ticks, 10%/50% reference lines, and a `CPU Threshold Violated! (57.45%)` annotation.
 
 Evaluation Checklist:
 - docs/evaluation_checklist.md

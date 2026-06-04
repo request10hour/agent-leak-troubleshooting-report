@@ -14,7 +14,7 @@ Graph:
 
 ![CPU load growth](../../evidence/graphs/02_cpu_load_growth.svg)
 
-CPU 그래프는 앱 로그의 `CpuWorker` load 값만 사용했다. `57.45%` threshold 초과와 `10.00%` cooldown 반복을 원본 값 그대로 표시한다. 따라서 CPU 케이스는 앱 내부 `CpuWorker` load, 고빈도 `top` 샘플, 직후 PID 소멸을 함께 근거로 판단했다.
+CPU 그래프는 앱 로그의 `CpuWorker` load 값만 사용했다. `57.45%` 지점에서 `CPU Threshold Violated!`가 발생했고, `CPU_MAX_OCCUPY=10` 조건에서는 10% 근처에서 cooldown을 반복했다. OS 관점의 `top`/`ps` 증거는 아래 로그 발췌와 `evidence/cpu/`에 보존했다.
 
 - 파일:
   - `evidence/cpu/before_app.log`
