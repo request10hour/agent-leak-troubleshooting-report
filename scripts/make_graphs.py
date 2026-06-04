@@ -3,6 +3,7 @@
 
 from __future__ import annotations
 
+from dataclasses import dataclass
 from datetime import datetime
 import html
 import re
@@ -13,31 +14,53 @@ ROOT = Path(__file__).resolve().parents[1]
 GRAPH_DIR = ROOT / "evidence" / "graphs"
 
 
+@dataclass
+class OomSeries:
+    points: list[tuple[float, float]]
+    process_missing_elapsed: float | None
+
+
 def parse_iso(value: str) -> datetime:
     return datetime.fromisoformat(value)
 
 
-def parse_oom_monitor(path: Path) -> list[tuple[float, float]]:
-    """Read monitor.sh output and return elapsed seconds with RSS in MB."""
-    rows: list[tuple[datetime, float]] = []
+def parse_oom_monitor(path: Path) -> OomSeries:
+    """Read monitor.sh output and keep only RSS change points."""
+    rows: list[tuple[datetime, int]] = []
+    process_missing_at: datetime | None = None
+
     for line in path.read_text().splitlines():
         parts = line.split()
-        if len(parts) < 6 or not parts[0].startswith("2026-"):
+        if parts and parts[0].startswith("2026-") and "process_missing" in line:
+            process_missing_at = parse_iso(parts[0])
             continue
-        if "process_missing" in line:
+        if len(parts) < 6 or not parts[0].startswith("2026-"):
             continue
         try:
             timestamp = parse_iso(parts[0])
-            rss_mb = int(parts[5]) / 1024
+            rss_kb = int(parts[5])
         except (ValueError, IndexError):
             continue
-        rows.append((timestamp, rss_mb))
+        rows.append((timestamp, rss_kb))
 
     if not rows:
-        return []
+        return OomSeries([], None)
 
     base = rows[0][0]
-    return [((ts - base).total_seconds(), rss) for ts, rss in rows]
+    collapsed: list[tuple[float, float]] = []
+    last_rss_kb: int | None = None
+    for timestamp, rss_kb in rows:
+        if rss_kb == last_rss_kb:
+            continue
+        elapsed = (timestamp - base).total_seconds()
+        collapsed.append((elapsed, rss_kb / 1024))
+        last_rss_kb = rss_kb
+
+    missing_elapsed = None
+    if process_missing_at is not None:
+        missing_elapsed = (process_missing_at - base).total_seconds()
+
+    return OomSeries(collapsed, missing_elapsed)
 
 
 def parse_cpu_log(path: Path) -> list[tuple[float, float]]:
@@ -93,6 +116,117 @@ def scale_points(
         y = top + height - ((y_value - min_y) / (max_y - min_y or 1)) * height
         points.append(f"{x:.1f},{y:.1f}")
     return " ".join(points)
+
+
+def point_xy(
+    point: tuple[float, float],
+    max_x: float,
+    max_y: float,
+    left: int,
+    top: int,
+    width: int,
+    height: int,
+) -> tuple[float, float]:
+    x_value, y_value = point
+    x = left + (x_value / (max_x or 1)) * width
+    y = top + height - (y_value / (max_y or 1)) * height
+    return x, y
+
+
+def step_path(
+    points: list[tuple[float, float]],
+    max_x: float,
+    max_y: float,
+    left: int,
+    top: int,
+    width: int,
+    height: int,
+) -> str:
+    """Build a stair-step path that matches sampled RSS changes."""
+    if not points:
+        return ""
+
+    first_x, first_y = point_xy(points[0], max_x, max_y, left, top, width, height)
+    parts = [f"M {first_x:.1f} {first_y:.1f}"]
+    for point in points[1:]:
+        x, y = point_xy(point, max_x, max_y, left, top, width, height)
+        parts.append(f"H {x:.1f}")
+        parts.append(f"V {y:.1f}")
+    if len(points) == 1:
+        parts.append(f"H {first_x + 1:.1f}")
+    return " ".join(parts)
+
+
+def svg_oom_graph(before: OomSeries, after: OomSeries, out_path: Path) -> None:
+    """Write the OOM graph with limits and process_missing markers."""
+    width, height = 980, 590
+    left, top = 80, 60
+    plot_width, plot_height = 700, 360
+    max_x, max_y = 35.0, 300.0
+
+    lines = [
+        f'<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" viewBox="0 0 {width} {height}">',
+        "<title>OOM RSS Growth from monitor.sh</title>",
+        "<desc>Source values include 21620KB, 149640KB, 277620KB, process_missing, 128MB, and 256MB from existing evidence logs.</desc>",
+        '<rect width="100%" height="100%" fill="white"/>',
+        f'<text x="{left}" y="34" font-family="monospace" font-size="22" font-weight="bold">OOM RSS Growth from monitor.sh</text>',
+        f'<line x1="{left}" y1="{top + plot_height}" x2="{left + plot_width}" y2="{top + plot_height}" stroke="#333"/>',
+        f'<line x1="{left}" y1="{top}" x2="{left}" y2="{top + plot_height}" stroke="#333"/>',
+        f'<text x="{left + plot_width // 2 - 140}" y="{top + plot_height + 48}" font-family="monospace" font-size="15">elapsed seconds from monitor start</text>',
+        f'<text x="18" y="{top + plot_height // 2}" font-family="monospace" font-size="15" transform="rotate(-90 18,{top + plot_height // 2})">RSS MB</text>',
+    ]
+
+    for seconds in range(0, 36, 5):
+        x = left + (seconds / max_x) * plot_width
+        lines.append(f'<line x1="{x:.1f}" y1="{top}" x2="{x:.1f}" y2="{top + plot_height}" stroke="#eee"/>')
+        lines.append(f'<text x="{x - 8:.1f}" y="{top + plot_height + 22}" font-family="monospace" font-size="12">{seconds}</text>')
+
+    for value in [0, 64, 128, 192, 256, 300]:
+        y = top + plot_height - (value / max_y) * plot_height
+        lines.append(f'<line x1="{left}" y1="{y:.1f}" x2="{left + plot_width}" y2="{y:.1f}" stroke="#eee"/>')
+        lines.append(f'<text x="30" y="{y + 4:.1f}" font-family="monospace" font-size="12">{value}</text>')
+
+    for limit, color in [(128, "#868e96"), (256, "#495057")]:
+        y = top + plot_height - (limit / max_y) * plot_height
+        lines.append(f'<line x1="{left}" y1="{y:.1f}" x2="{left + plot_width}" y2="{y:.1f}" stroke="{color}" stroke-dasharray="7 5"/>')
+        lines.append(f'<text x="{left + plot_width + 18}" y="{y + 4:.1f}" font-family="monospace" font-size="13" fill="{color}">limit {limit}MB</text>')
+
+    for label, color, series in [
+        ("Before MEMORY_LIMIT=128", "#c92a2a", before),
+        ("After MEMORY_LIMIT=256", "#1864ab", after),
+    ]:
+        path = step_path(series.points, max_x, max_y, left, top, plot_width, plot_height)
+        if path:
+            lines.append(f'<path d="{path}" fill="none" stroke="{color}" stroke-width="3"/>')
+        for point in series.points:
+            x, y = point_xy(point, max_x, max_y, left, top, plot_width, plot_height)
+            lines.append(f'<circle cx="{x:.1f}" cy="{y:.1f}" r="4" fill="{color}"/>')
+        if series.process_missing_elapsed is not None:
+            x = left + (series.process_missing_elapsed / max_x) * plot_width
+            lines.append(f'<line x1="{x:.1f}" y1="{top}" x2="{x:.1f}" y2="{top + plot_height}" stroke="{color}" stroke-dasharray="4 4"/>')
+            lines.append(f'<text x="{x + 5:.1f}" y="{top + 18}" font-family="monospace" font-size="12" fill="{color}">process_missing</text>')
+
+    legend_x = left + plot_width + 18
+    legend_y = top + 88
+    for index, (label, color) in enumerate([
+        ("Before MEMORY_LIMIT=128", "#c92a2a"),
+        ("After MEMORY_LIMIT=256", "#1864ab"),
+    ]):
+        y = legend_y + index * 26
+        lines.append(f'<rect x="{legend_x}" y="{y - 12}" width="16" height="4" fill="{color}"/>')
+        lines.append(f'<text x="{legend_x + 24}" y="{y - 5}" font-family="monospace" font-size="13">{html.escape(label)}</text>')
+
+    lines.extend(
+        [
+            f'<text x="{legend_x}" y="{legend_y + 76}" font-family="monospace" font-size="13">Before: 19s survival</text>',
+            f'<text x="{legend_x}" y="{legend_y + 98}" font-family="monospace" font-size="13">After: 42s survival</text>',
+            f'<text x="{legend_x}" y="{legend_y + 120}" font-family="monospace" font-size="13">MemoryGuard terminated</text>',
+            f'<text x="{left}" y="{height - 42}" font-family="monospace" font-size="12">RSS values are sampled from monitor.sh. Repeated identical RSS samples were collapsed for readability.</text>',
+            f'<text x="{left}" y="{height - 22}" font-family="monospace" font-size="12">Raw logs remain unchanged in evidence/oom/.</text>',
+            "</svg>",
+        ]
+    )
+    out_path.write_text("\n".join(lines) + "\n")
 
 
 def svg_graph(
@@ -156,19 +290,10 @@ def svg_graph(
 def main() -> None:
     GRAPH_DIR.mkdir(parents=True, exist_ok=True)
 
-    # OOM 그래프는 monitor.sh의 RSS 값을 그대로 사용한다.
+    # OOM 그래프는 monitor.sh의 RSS 변화 지점과 process_missing 시점만 사용한다.
     oom_before = parse_oom_monitor(ROOT / "evidence" / "oom" / "before_monitor.log")
     oom_after = parse_oom_monitor(ROOT / "evidence" / "oom" / "after_monitor.log")
-    svg_graph(
-        "OOM RSS Growth",
-        "RSS MB",
-        [
-            ("Before MEMORY_LIMIT=128", "#c92a2a", oom_before),
-            ("After MEMORY_LIMIT=256", "#1864ab", oom_after),
-        ],
-        GRAPH_DIR / "01_oom_rss_growth.svg",
-        "Source values include 21620KB, 149640KB, and 277620KB from monitor logs.",
-    )
+    svg_oom_graph(oom_before, oom_after, GRAPH_DIR / "01_oom_rss_growth.svg")
 
     # CPU 그래프는 CpuWorker가 로그에 남긴 load 값만 사용한다.
     cpu_before = parse_cpu_log(ROOT / "evidence" / "cpu" / "before_app.log")

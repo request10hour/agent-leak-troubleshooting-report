@@ -16,6 +16,7 @@ Created Files:
 - docs/issues/02_cpu.md
 - docs/issues/03_deadlock.md
 - docs/evaluation_answers.md
+- docs/evaluation_checklist.md
 - docs/prerequisites.md
 - docs/final_report.md
 - evidence/oom/*
@@ -34,6 +35,7 @@ Screenshot Evidence:
 - OOM: evidence/screenshots/01_oom_terminal.png
 - CPU: evidence/screenshots/02_cpu_terminal.png
 - Deadlock: evidence/screenshots/03_deadlock_terminal.png
+- Terminal screenshots were captured from xterm windows only, not the full Xvfb root screen.
 
 GUI Capture Method:
 - Direct DISPLAY: not available
@@ -45,6 +47,10 @@ GUI Capture Method:
 Graph Evidence:
 - OOM RSS growth: evidence/graphs/01_oom_rss_growth.svg
 - CPU load growth: evidence/graphs/02_cpu_load_growth.svg
+- OOM graph uses collapsed RSS change points for readability while preserving raw logs.
+
+Evaluation Checklist:
+- docs/evaluation_checklist.md
 
 OOM Summary:
 - PID: launcher 9049, observed worker 9053

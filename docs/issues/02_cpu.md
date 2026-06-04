@@ -14,6 +14,8 @@ Graph:
 
 ![CPU load growth](../../evidence/graphs/02_cpu_load_growth.svg)
 
+CPU 그래프는 앱 로그의 `CpuWorker` load 값만 사용했다. `57.45%` threshold 초과와 `10.00%` cooldown 반복을 원본 값 그대로 표시한다.
+
 - 파일:
   - `evidence/cpu/before_app.log`
   - `evidence/cpu/before_monitor.log`

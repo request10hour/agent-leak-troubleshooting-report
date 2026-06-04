@@ -92,7 +92,7 @@ RC
 
   xterm \
     -T "$title" \
-    -geometry 160x46+10+10 \
+    -geometry 140x36+20+20 \
     -fa Monospace \
     -fs 10 \
     -bg white \
@@ -114,16 +114,22 @@ type_command() {
   sleep 0.7
 }
 
-# 현재 X 화면을 PNG로 저장한다.
+# 현재 xterm 창만 PNG로 저장한다.
 capture_screen() {
   local outfile="$1"
 
   rm -f "$outfile"
   sleep 1
+  xdotool windowactivate "$WIN_ID" 2>/dev/null || true
+  xdotool windowfocus "$WIN_ID" 2>/dev/null || true
+  sleep 0.5
+
   if [ "$CAPTURE_CMD" = "scrot" ]; then
-    scrot "$outfile"
+    # -u는 현재 활성 창만, -b는 창 테두리까지 캡처한다.
+    scrot -u -b "$outfile"
   else
-    import -window root "$outfile"
+    # ImageMagick import는 root 화면이 아니라 xterm window id만 캡처한다.
+    import -window "$WIN_ID" "$outfile"
   fi
 
   if [ ! -s "$outfile" ]; then
@@ -147,7 +153,7 @@ capture_oom() {
   open_terminal "agent-oom-terminal"
   type_command "pwd"
   type_command "whoami"
-  type_command "sed -n '82,87p' docs/issues/01_oom.md"
+  type_command "grep -E \"^\\| Before \\| 128MB|^\\| After \\| 256MB\" docs/issues/01_oom.md"
   type_command "grep -E \"21620|149640|process_missing\" evidence/oom/before_monitor.log"
   type_command "grep -E \"21580|277620|process_missing\" evidence/oom/after_monitor.log"
   type_command "grep -E \"Memory limit exceeded|Self-terminating process\" evidence/oom/before_app.log evidence/oom/after_app.log"

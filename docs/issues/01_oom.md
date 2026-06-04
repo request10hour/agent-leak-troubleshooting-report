@@ -14,6 +14,8 @@ Graph:
 
 ![OOM RSS growth](../../evidence/graphs/01_oom_rss_growth.svg)
 
+그래프는 `monitor.sh`의 RSS 샘플을 사용했다. 보기 쉽게 같은 RSS가 반복되는 구간은 줄였지만, 원본 로그는 `evidence/oom/`에 그대로 보존했다.
+
 - 파일:
   - `evidence/oom/before_app.log`
   - `evidence/oom/before_monitor.log`

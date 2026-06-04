@@ -1,89 +1,74 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="900" height="520" viewBox="0 0 900 520">
-<title>OOM RSS Growth</title>
-<desc>Source values include 21620KB, 149640KB, and 277620KB from monitor logs.</desc>
+<svg xmlns="http://www.w3.org/2000/svg" width="980" height="590" viewBox="0 0 980 590">
+<title>OOM RSS Growth from monitor.sh</title>
+<desc>Source values include 21620KB, 149640KB, 277620KB, process_missing, 128MB, and 256MB from existing evidence logs.</desc>
 <rect width="100%" height="100%" fill="white"/>
-<text x="80" y="35" font-family="monospace" font-size="22" font-weight="bold">OOM RSS Growth</text>
-<line x1="80" y1="400" x2="800" y2="400" stroke="#333"/>
-<line x1="80" y1="60" x2="80" y2="400" stroke="#333"/>
-<text x="370" y="450" font-family="monospace" font-size="15">elapsed seconds</text>
-<text x="18" y="230" font-family="monospace" font-size="15" transform="rotate(-90 18,230)">RSS MB</text>
-<line x1="80.0" y1="60" x2="80.0" y2="400" stroke="#eee"/>
-<text x="68.0" y="422" font-family="monospace" font-size="12">0</text>
-<line x1="224.0" y1="60" x2="224.0" y2="400" stroke="#eee"/>
-<text x="212.0" y="422" font-family="monospace" font-size="12">6</text>
-<line x1="368.0" y1="60" x2="368.0" y2="400" stroke="#eee"/>
-<text x="356.0" y="422" font-family="monospace" font-size="12">12</text>
-<line x1="512.0" y1="60" x2="512.0" y2="400" stroke="#eee"/>
-<text x="500.0" y="422" font-family="monospace" font-size="12">19</text>
-<line x1="656.0" y1="60" x2="656.0" y2="400" stroke="#eee"/>
-<text x="644.0" y="422" font-family="monospace" font-size="12">25</text>
-<line x1="800.0" y1="60" x2="800.0" y2="400" stroke="#eee"/>
-<text x="788.0" y="422" font-family="monospace" font-size="12">31</text>
-<line x1="80" y1="400.0" x2="800" y2="400.0" stroke="#eee"/>
-<text x="20" y="404.0" font-family="monospace" font-size="12">0.0</text>
-<line x1="80" y1="332.0" x2="800" y2="332.0" stroke="#eee"/>
-<text x="20" y="336.0" font-family="monospace" font-size="12">59.6</text>
-<line x1="80" y1="264.0" x2="800" y2="264.0" stroke="#eee"/>
-<text x="20" y="268.0" font-family="monospace" font-size="12">119.3</text>
-<line x1="80" y1="196.0" x2="800" y2="196.0" stroke="#eee"/>
-<text x="20" y="200.0" font-family="monospace" font-size="12">178.9</text>
-<line x1="80" y1="128.0" x2="800" y2="128.0" stroke="#eee"/>
-<text x="20" y="132.0" font-family="monospace" font-size="12">238.6</text>
-<line x1="80" y1="60.0" x2="800" y2="60.0" stroke="#eee"/>
-<text x="20" y="64.0" font-family="monospace" font-size="12">298.2</text>
-<polyline points="80.0,375.9 103.2,375.9 126.5,347.4 149.7,347.4 172.9,347.4 196.1,318.9 219.4,318.9 242.6,318.9 265.8,290.4 289.0,290.4 312.3,290.4 335.5,261.9 358.7,261.9 381.9,261.9 405.2,233.4 428.4,233.4 451.6,233.4" fill="none" stroke="#c92a2a" stroke-width="3"/>
-<circle cx="80.0" cy="375.9" r="3" fill="#c92a2a"/>
-<circle cx="103.2" cy="375.9" r="3" fill="#c92a2a"/>
-<circle cx="126.5" cy="347.4" r="3" fill="#c92a2a"/>
-<circle cx="149.7" cy="347.4" r="3" fill="#c92a2a"/>
-<circle cx="172.9" cy="347.4" r="3" fill="#c92a2a"/>
-<circle cx="196.1" cy="318.9" r="3" fill="#c92a2a"/>
-<circle cx="219.4" cy="318.9" r="3" fill="#c92a2a"/>
-<circle cx="242.6" cy="318.9" r="3" fill="#c92a2a"/>
-<circle cx="265.8" cy="290.4" r="3" fill="#c92a2a"/>
-<circle cx="289.0" cy="290.4" r="3" fill="#c92a2a"/>
-<circle cx="312.3" cy="290.4" r="3" fill="#c92a2a"/>
-<circle cx="335.5" cy="261.9" r="3" fill="#c92a2a"/>
-<circle cx="358.7" cy="261.9" r="3" fill="#c92a2a"/>
-<circle cx="381.9" cy="261.9" r="3" fill="#c92a2a"/>
-<circle cx="405.2" cy="233.4" r="3" fill="#c92a2a"/>
-<circle cx="428.4" cy="233.4" r="3" fill="#c92a2a"/>
-<circle cx="451.6" cy="233.4" r="3" fill="#c92a2a"/>
-<rect x="825" y="48" width="16" height="4" fill="#c92a2a"/>
-<text x="848" y="55" font-family="monospace" font-size="14">Before MEMORY_LIMIT=128</text>
-<polyline points="80.0,376.0 103.2,376.0 126.5,347.5 149.7,347.5 172.9,347.5 196.1,319.0 219.4,319.0 242.6,319.0 265.8,290.5 289.0,290.5 312.3,290.5 335.5,261.9 358.7,261.9 381.9,261.9 405.2,233.4 428.4,233.4 451.6,233.4 474.8,204.9 498.1,204.9 521.3,204.9 544.5,176.4 567.7,176.4 591.0,176.4 614.2,147.9 637.4,147.9 660.6,147.9 683.9,119.4 707.1,119.4 730.3,119.4 753.5,90.9 776.8,90.9 800.0,90.9" fill="none" stroke="#1864ab" stroke-width="3"/>
-<circle cx="80.0" cy="376.0" r="3" fill="#1864ab"/>
-<circle cx="103.2" cy="376.0" r="3" fill="#1864ab"/>
-<circle cx="126.5" cy="347.5" r="3" fill="#1864ab"/>
-<circle cx="149.7" cy="347.5" r="3" fill="#1864ab"/>
-<circle cx="172.9" cy="347.5" r="3" fill="#1864ab"/>
-<circle cx="196.1" cy="319.0" r="3" fill="#1864ab"/>
-<circle cx="219.4" cy="319.0" r="3" fill="#1864ab"/>
-<circle cx="242.6" cy="319.0" r="3" fill="#1864ab"/>
-<circle cx="265.8" cy="290.5" r="3" fill="#1864ab"/>
-<circle cx="289.0" cy="290.5" r="3" fill="#1864ab"/>
-<circle cx="312.3" cy="290.5" r="3" fill="#1864ab"/>
-<circle cx="335.5" cy="261.9" r="3" fill="#1864ab"/>
-<circle cx="358.7" cy="261.9" r="3" fill="#1864ab"/>
-<circle cx="381.9" cy="261.9" r="3" fill="#1864ab"/>
-<circle cx="405.2" cy="233.4" r="3" fill="#1864ab"/>
-<circle cx="428.4" cy="233.4" r="3" fill="#1864ab"/>
-<circle cx="451.6" cy="233.4" r="3" fill="#1864ab"/>
-<circle cx="474.8" cy="204.9" r="3" fill="#1864ab"/>
-<circle cx="498.1" cy="204.9" r="3" fill="#1864ab"/>
-<circle cx="521.3" cy="204.9" r="3" fill="#1864ab"/>
-<circle cx="544.5" cy="176.4" r="3" fill="#1864ab"/>
-<circle cx="567.7" cy="176.4" r="3" fill="#1864ab"/>
-<circle cx="591.0" cy="176.4" r="3" fill="#1864ab"/>
-<circle cx="614.2" cy="147.9" r="3" fill="#1864ab"/>
-<circle cx="637.4" cy="147.9" r="3" fill="#1864ab"/>
-<circle cx="660.6" cy="147.9" r="3" fill="#1864ab"/>
-<circle cx="683.9" cy="119.4" r="3" fill="#1864ab"/>
-<circle cx="707.1" cy="119.4" r="3" fill="#1864ab"/>
-<circle cx="730.3" cy="119.4" r="3" fill="#1864ab"/>
-<circle cx="753.5" cy="90.9" r="3" fill="#1864ab"/>
-<circle cx="776.8" cy="90.9" r="3" fill="#1864ab"/>
-<circle cx="800.0" cy="90.9" r="3" fill="#1864ab"/>
-<rect x="825" y="74" width="16" height="4" fill="#1864ab"/>
-<text x="848" y="81" font-family="monospace" font-size="14">After MEMORY_LIMIT=256</text>
+<text x="80" y="34" font-family="monospace" font-size="22" font-weight="bold">OOM RSS Growth from monitor.sh</text>
+<line x1="80" y1="420" x2="780" y2="420" stroke="#333"/>
+<line x1="80" y1="60" x2="80" y2="420" stroke="#333"/>
+<text x="290" y="468" font-family="monospace" font-size="15">elapsed seconds from monitor start</text>
+<text x="18" y="240" font-family="monospace" font-size="15" transform="rotate(-90 18,240)">RSS MB</text>
+<line x1="80.0" y1="60" x2="80.0" y2="420" stroke="#eee"/>
+<text x="72.0" y="442" font-family="monospace" font-size="12">0</text>
+<line x1="180.0" y1="60" x2="180.0" y2="420" stroke="#eee"/>
+<text x="172.0" y="442" font-family="monospace" font-size="12">5</text>
+<line x1="280.0" y1="60" x2="280.0" y2="420" stroke="#eee"/>
+<text x="272.0" y="442" font-family="monospace" font-size="12">10</text>
+<line x1="380.0" y1="60" x2="380.0" y2="420" stroke="#eee"/>
+<text x="372.0" y="442" font-family="monospace" font-size="12">15</text>
+<line x1="480.0" y1="60" x2="480.0" y2="420" stroke="#eee"/>
+<text x="472.0" y="442" font-family="monospace" font-size="12">20</text>
+<line x1="580.0" y1="60" x2="580.0" y2="420" stroke="#eee"/>
+<text x="572.0" y="442" font-family="monospace" font-size="12">25</text>
+<line x1="680.0" y1="60" x2="680.0" y2="420" stroke="#eee"/>
+<text x="672.0" y="442" font-family="monospace" font-size="12">30</text>
+<line x1="780.0" y1="60" x2="780.0" y2="420" stroke="#eee"/>
+<text x="772.0" y="442" font-family="monospace" font-size="12">35</text>
+<line x1="80" y1="420.0" x2="780" y2="420.0" stroke="#eee"/>
+<text x="30" y="424.0" font-family="monospace" font-size="12">0</text>
+<line x1="80" y1="343.2" x2="780" y2="343.2" stroke="#eee"/>
+<text x="30" y="347.2" font-family="monospace" font-size="12">64</text>
+<line x1="80" y1="266.4" x2="780" y2="266.4" stroke="#eee"/>
+<text x="30" y="270.4" font-family="monospace" font-size="12">128</text>
+<line x1="80" y1="189.6" x2="780" y2="189.6" stroke="#eee"/>
+<text x="30" y="193.6" font-family="monospace" font-size="12">192</text>
+<line x1="80" y1="112.8" x2="780" y2="112.8" stroke="#eee"/>
+<text x="30" y="116.8" font-family="monospace" font-size="12">256</text>
+<line x1="80" y1="60.0" x2="780" y2="60.0" stroke="#eee"/>
+<text x="30" y="64.0" font-family="monospace" font-size="12">300</text>
+<line x1="80" y1="266.4" x2="780" y2="266.4" stroke="#868e96" stroke-dasharray="7 5"/>
+<text x="798" y="270.4" font-family="monospace" font-size="13" fill="#868e96">limit 128MB</text>
+<line x1="80" y1="112.8" x2="780" y2="112.8" stroke="#495057" stroke-dasharray="7 5"/>
+<text x="798" y="116.8" font-family="monospace" font-size="13" fill="#495057">limit 256MB</text>
+<path d="M 80.0 394.7 H 120.0 V 364.7 H 180.0 V 334.7 H 240.0 V 304.6 H 300.0 V 274.6 H 360.0 V 244.6" fill="none" stroke="#c92a2a" stroke-width="3"/>
+<circle cx="80.0" cy="394.7" r="4" fill="#c92a2a"/>
+<circle cx="120.0" cy="364.7" r="4" fill="#c92a2a"/>
+<circle cx="180.0" cy="334.7" r="4" fill="#c92a2a"/>
+<circle cx="240.0" cy="304.6" r="4" fill="#c92a2a"/>
+<circle cx="300.0" cy="274.6" r="4" fill="#c92a2a"/>
+<circle cx="360.0" cy="244.6" r="4" fill="#c92a2a"/>
+<line x1="420.0" y1="60" x2="420.0" y2="420" stroke="#c92a2a" stroke-dasharray="4 4"/>
+<text x="425.0" y="78" font-family="monospace" font-size="12" fill="#c92a2a">process_missing</text>
+<path d="M 80.0 394.7 H 120.0 V 364.7 H 180.0 V 334.7 H 240.0 V 304.7 H 300.0 V 274.7 H 360.0 V 244.7 H 420.0 V 214.7 H 480.0 V 184.7 H 540.0 V 154.7 H 600.0 V 124.7 H 660.0 V 94.7" fill="none" stroke="#1864ab" stroke-width="3"/>
+<circle cx="80.0" cy="394.7" r="4" fill="#1864ab"/>
+<circle cx="120.0" cy="364.7" r="4" fill="#1864ab"/>
+<circle cx="180.0" cy="334.7" r="4" fill="#1864ab"/>
+<circle cx="240.0" cy="304.7" r="4" fill="#1864ab"/>
+<circle cx="300.0" cy="274.7" r="4" fill="#1864ab"/>
+<circle cx="360.0" cy="244.7" r="4" fill="#1864ab"/>
+<circle cx="420.0" cy="214.7" r="4" fill="#1864ab"/>
+<circle cx="480.0" cy="184.7" r="4" fill="#1864ab"/>
+<circle cx="540.0" cy="154.7" r="4" fill="#1864ab"/>
+<circle cx="600.0" cy="124.7" r="4" fill="#1864ab"/>
+<circle cx="660.0" cy="94.7" r="4" fill="#1864ab"/>
+<line x1="720.0" y1="60" x2="720.0" y2="420" stroke="#1864ab" stroke-dasharray="4 4"/>
+<text x="725.0" y="78" font-family="monospace" font-size="12" fill="#1864ab">process_missing</text>
+<rect x="798" y="136" width="16" height="4" fill="#c92a2a"/>
+<text x="822" y="143" font-family="monospace" font-size="13">Before MEMORY_LIMIT=128</text>
+<rect x="798" y="162" width="16" height="4" fill="#1864ab"/>
+<text x="822" y="169" font-family="monospace" font-size="13">After MEMORY_LIMIT=256</text>
+<text x="798" y="224" font-family="monospace" font-size="13">Before: 19s survival</text>
+<text x="798" y="246" font-family="monospace" font-size="13">After: 42s survival</text>
+<text x="798" y="268" font-family="monospace" font-size="13">MemoryGuard terminated</text>
+<text x="80" y="548" font-family="monospace" font-size="12">RSS values are sampled from monitor.sh. Repeated identical RSS samples were collapsed for readability.</text>
+<text x="80" y="568" font-family="monospace" font-size="12">Raw logs remain unchanged in evidence/oom/.</text>
 </svg>

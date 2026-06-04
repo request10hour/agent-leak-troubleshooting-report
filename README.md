@@ -13,6 +13,7 @@ agent-leak-troubleshooting/
 │   ├── environment.md
 │   ├── final_report.md
 │   ├── evaluation_answers.md
+│   ├── evaluation_checklist.md
 │   └── issues/
 │       ├── 01_oom.md
 │       ├── 02_cpu.md
@@ -44,6 +45,7 @@ agent-leak-troubleshooting/
 - CPU Report: [docs/issues/02_cpu.md](docs/issues/02_cpu.md)
 - Deadlock Report: [docs/issues/03_deadlock.md](docs/issues/03_deadlock.md)
 - Evaluation Answers: [docs/evaluation_answers.md](docs/evaluation_answers.md)
+- Evaluation Checklist: [docs/evaluation_checklist.md](docs/evaluation_checklist.md)
 
 ## Visual Evidence
 
