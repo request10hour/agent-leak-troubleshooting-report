@@ -9,7 +9,6 @@
 ```text
 agent-leak-troubleshooting/
 ├── README.md
-├── .gitignore
 ├── docs/
 │   ├── environment.md
 │   ├── final_report.md
@@ -23,10 +22,6 @@ agent-leak-troubleshooting/
 │   ├── cpu/
 │   └── deadlock/
 └── scripts/
-    ├── env_base.sh
-    ├── run_agent.sh
-    ├── monitor.sh
-    └── capture_status.sh
 ```
 
 - `docs/`: 환경 점검, 이슈 리포트, 발표용 답변, 최종 보고서
@@ -49,7 +44,6 @@ agent-leak-troubleshooting/
 - `evidence/oom/`: `MEMORY_LIMIT` 변경 전후 로그와 monitor 결과
 - `evidence/cpu/`: `CPU_MAX_OCCUPY` 변경 전후 로그와 top/ps 결과
 - `evidence/deadlock/`: `MULTI_THREAD_ENABLE` 변경 전후 PID, thread, top-H 결과
-- `evidence/file_list.txt`: 압축 해제 후 작업 디렉터리 파일 목록
 
 ## Reproduction Summary
 
